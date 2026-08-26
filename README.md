@@ -28,7 +28,14 @@ that go with them, served via GitHub Pages.
 | `amsterdam_circularwalk-13km-zunderdorp-ransdorp-durgerdam.gpx` | Zunderdorp – Ransdorp – Durgerdam (13 km) |
 | `781-laarzenpad-naardermeer-jan-2017.gpx` | Laarzenpad Naardermeer |
 | `352-oppad-en-kromme-rade.gpx` | Oppad en Kromme Rade |
-| `map_0.gpx` | Konikroute (Nationaal Park Zuid-Kennemerland) |
+| `konik.gpx` | Konikroute (Nationaal Park Zuid-Kennemerland) |
+| `middelpolder.gpx` | Trage Tocht Amstelveen Middelpolder |
+| `gein.gpx` | Kort en Prachtig Abcoude – Gein |
+| `loenen.gpx` | Kort en Prachtig Loenen aan de Vecht |
+| `muiden.gpx` | Langs Vecht en IJmeer (Muiden) |
+| `twiske.gpx` | Trage Tocht Het Twiske |
+| `graveland.gpx` | Trage Tocht 's-Graveland |
+| `tienbergen.gpx` | Tien Bergenroute (Nationaal Park Zuid-Kennemerland) |
 
 - `download-gpx.sh` / `download-gpx-round2.sh` — the scripts originally used to
   fetch the freely available tracks from their sources.
