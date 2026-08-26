@@ -1,14 +1,18 @@
-# Walking Routes around Amsterdam
+# Walks Within Riding Distance
 
-A small collection of GPX tracks for walks in and around Amsterdam, with an
-interactive map viewer served via GitHub Pages.
+A guide to walks within riding distance of Amstelveen, with the GPX tracks
+that go with them, served via GitHub Pages.
 
-**View the map:** https://akariv.github.io/routes/
+**View the guide:** https://akariv.github.io/routes/
 
 ## Contents
 
-- `index.html` — Leaflet-based viewer that draws all tracks on an OpenStreetMap
-  base layer. Click a route in the sidebar to zoom to it, click its color
+- `index.html` — the guide itself: nineteen walks ordered by riding distance
+  from Amstelveen, with terrain/distance/kids filters, a radial overview map,
+  and (for the ten walks with a freely available GPX) an embedded track shape
+  that opens into a pannable OpenStreetMap view.
+- `map.html` — a simple Leaflet viewer that draws all downloaded GPX tracks
+  on one map. Click a route in the sidebar to zoom to it, click its color
   swatch to toggle it, and use the ⇩ link to download the GPX file.
 - `*.gpx` — the tracks themselves:
 

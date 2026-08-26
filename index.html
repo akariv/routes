@@ -1,250 +1,725 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Walking Routes around Amsterdam</title>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<title>Walks Within Riding Distance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
 <style>
-  :root {
-    --bg: #ffffff;
-    --panel: #f7f7f5;
-    --text: #1c1c1c;
-    --muted: #6b6b6b;
-    --border: #e2e2de;
-    --accent: #2f6f4f;
+:root{
+  --ground:#EEF1EA; --surface:#FBFCF9; --surface-2:#E5EADF;
+  --ink:#17211C; --ink-2:#55625A; --ink-3:#7C8981;
+  --line:#D6DCD2; --line-strong:#B9C2B3;
+  --accent:#A8391F; --accent-soft:#F0DED8;
+  --t-water:#2A6A80; --t-polder:#5E8A4E; --t-dune:#9A7024; --t-forest:#3C6B42; --t-heath:#7A4A72;
+  --warn:#8A5B12; --warn-bg:#F4E9D5;
+  --shadow:0 1px 2px rgba(23,33,28,.05), 0 8px 24px -18px rgba(23,33,28,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#131815; --surface:#1B211D; --surface-2:#232A25;
+    --ink:#E8ECE5; --ink-2:#9BA89F; --ink-3:#7C8981;
+    --line:#2C352E; --line-strong:#3D4941;
+    --accent:#E58060; --accent-soft:#3A241D;
+    --t-water:#6FB6CE; --t-polder:#9DC285; --t-dune:#DBB16A; --t-forest:#83B78B; --t-heath:#C494BB;
+    --warn:#D9AE66; --warn-bg:#302818;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -20px rgba(0,0,0,.9);
   }
-  * { box-sizing: border-box; }
-  html, body { height: 100%; margin: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: var(--text);
-    background: var(--bg);
-    display: flex;
-    flex-direction: column;
-  }
-  header {
-    padding: 10px 16px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  header h1 { font-size: 18px; margin: 0; }
-  header .sub { color: var(--muted); font-size: 13px; }
-  #layout { flex: 1; display: flex; min-height: 0; }
-  #sidebar {
-    width: 300px;
-    overflow-y: auto;
-    border-right: 1px solid var(--border);
-    background: var(--panel);
-    padding: 8px;
-  }
-  #map { flex: 1; }
-  .route {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 7px 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    user-select: none;
-  }
-  .route:hover { background: rgba(0,0,0,0.05); }
-  .route .swatch {
-    width: 14px; height: 14px;
-    border-radius: 4px;
-    flex: none;
-    border: 2px solid transparent;
-  }
-  .route.off .swatch { background: transparent !important; border-color: var(--muted); }
-  .route.off .name { color: var(--muted); }
-  .route .name { font-size: 14px; flex: 1; line-height: 1.25; }
-  .route .dist { font-size: 12px; color: var(--muted); flex: none; }
-  .route .dl {
-    flex: none;
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 13px;
-    padding: 2px 4px;
-    border-radius: 4px;
-  }
-  .route .dl:hover { color: var(--accent); background: rgba(0,0,0,0.06); }
-  #controls {
-    display: flex;
-    gap: 8px;
-    padding: 4px 8px 10px;
-  }
-  #controls button {
-    font-size: 12px;
-    padding: 4px 10px;
-    border: 1px solid var(--border);
-    background: var(--bg);
-    border-radius: 6px;
-    cursor: pointer;
-    color: var(--text);
-  }
-  #controls button:hover { border-color: var(--accent); color: var(--accent); }
-  @media (max-width: 700px) {
-    #layout { flex-direction: column; }
-    #sidebar {
-      width: 100%;
-      max-height: 40%;
-      border-right: none;
-      border-bottom: 1px solid var(--border);
-    }
-  }
+}
+:root[data-theme="dark"]{
+  --ground:#131815; --surface:#1B211D; --surface-2:#232A25;
+  --ink:#E8ECE5; --ink-2:#9BA89F; --ink-3:#7C8981;
+  --line:#2C352E; --line-strong:#3D4941;
+  --accent:#E58060; --accent-soft:#3A241D;
+  --t-water:#6FB6CE; --t-polder:#9DC285; --t-dune:#DBB16A; --t-forest:#83B78B; --t-heath:#C494BB;
+  --warn:#D9AE66; --warn-bg:#302818;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -20px rgba(0,0,0,.9);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Karla","Helvetica Neue",Arial,sans-serif;
+  font-size:16px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1040px; margin:0 auto; padding:0 20px 72px}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:3px}
+
+/* ---------- masthead ---------- */
+.mast{padding:48px 0 28px; display:grid; gap:34px; grid-template-columns:minmax(0,1fr) 340px; align-items:start}
+@media (max-width:820px){ .mast{grid-template-columns:minmax(0,1fr); padding-top:32px} }
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:11px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--ink-3); margin:0 0 14px;
+}
+h1{
+  font-family:"Newsreader",Georgia,serif; font-weight:600; font-size:clamp(38px,6vw,60px);
+  line-height:1.02; letter-spacing:-.015em; margin:0 0 18px; text-wrap:balance;
+}
+h1 em{font-style:italic; font-weight:400; color:var(--accent)}
+.lede{font-size:17px; color:var(--ink-2); max-width:56ch; margin:0 0 20px}
+.lede strong{color:var(--ink); font-weight:500}
+.meta-note{font-size:13.5px; color:var(--ink-3); max-width:60ch; margin:0}
+.meta-note a{color:var(--accent); text-decoration-color:color-mix(in srgb,var(--accent) 40%,transparent); text-underline-offset:2px}
+
+/* ---------- radial map ---------- */
+.radar{background:var(--surface); border:1px solid var(--line); border-radius:2px; padding:14px 14px 10px; box-shadow:var(--shadow)}
+.radar svg{display:block; width:100%; height:auto}
+.radar-cap{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px; letter-spacing:.06em;
+  color:var(--ink-3); margin:8px 2px 0; display:flex; justify-content:space-between; gap:8px;
+}
+.dot{cursor:pointer}
+.dot circle{transition:r .12s ease}
+.dot:hover circle.pin, .dot:focus circle.pin{r:7}
+.ring{fill:none; stroke:var(--line-strong); stroke-width:1}
+.ring-lbl{font-family:"IBM Plex Mono",monospace; font-size:8.5px; fill:var(--ink-3)}
+.spoke{stroke:var(--line); stroke-width:1}
+.home{fill:var(--accent)}
+.home-lbl{font-family:"IBM Plex Mono",monospace; font-size:9px; fill:var(--ink-2); letter-spacing:.08em}
+
+/* ---------- map lightbox ---------- */
+.lb{
+  position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center;
+  padding:24px; background:color-mix(in srgb, #0B0F0C 74%, transparent);
+}
+.lb[hidden]{display:none}
+.lb-panel{
+  background:var(--surface); border:1px solid var(--line-strong); border-radius:2px;
+  width:min(1000px,100%); height:min(720px,100%); display:flex; flex-direction:column;
+  box-shadow:0 24px 70px -30px rgba(0,0,0,.7);
+}
+.lb-head{display:flex; align-items:baseline; gap:6px 14px; flex-wrap:wrap; padding:14px 16px; border-bottom:1px solid var(--line)}
+.lb-head h3{
+  font-family:"Newsreader",Georgia,serif; font-weight:600; font-size:19px; margin:0; letter-spacing:-.01em;
+}
+.lb-sub{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-3); letter-spacing:.04em}
+.lb-x{
+  margin-left:auto; font:500 12px/1 "Karla",sans-serif; padding:7px 12px; cursor:pointer;
+  border:1px solid var(--line-strong); background:transparent; color:var(--ink-2); border-radius:999px;
+}
+.lb-x:hover{border-color:var(--ink-3); color:var(--ink)}
+.lb-map{position:relative; flex:1; overflow:hidden; background:var(--surface-2); touch-action:none; cursor:grab}
+.lb-map.drag{cursor:grabbing}
+.lb-tiles{position:absolute; inset:0; overflow:hidden}
+.lb-tiles img{position:absolute; width:256px; height:256px; user-select:none; -webkit-user-drag:none}
+.lb-ovl{position:absolute; inset:0; width:100%; height:100%; pointer-events:none}
+.lb-ovl .halo{fill:none; stroke:#FFF; stroke-opacity:.85; stroke-width:8; stroke-linejoin:round; stroke-linecap:round}
+.lb-ovl .path{fill:none; stroke:#B3341E; stroke-width:4; stroke-linejoin:round; stroke-linecap:round}
+.lb-ovl .pin{fill:#FFF; stroke:#17211C; stroke-width:3}
+.lb-map.notiles .halo{display:none}
+.lb-map.notiles .path{stroke:var(--accent)}
+.lb-map.notiles .pin{fill:var(--surface); stroke:var(--ink)}
+.lb-map.notiles .lb-attrib{display:none}
+.lb-map.notiles{cursor:default}
+.lb-zoom{position:absolute; top:10px; right:10px; display:flex; flex-direction:column; gap:4px}
+.lb-zoom button{
+  width:30px; height:30px; font:500 16px/1 "IBM Plex Mono",monospace; cursor:pointer;
+  background:var(--surface); color:var(--ink); border:1px solid var(--line-strong); border-radius:2px;
+}
+.lb-zoom button:hover{border-color:var(--ink-3)}
+.lb-attrib{
+  position:absolute; bottom:0; right:0; font:400 10px/1.6 "Karla",sans-serif; padding:2px 6px;
+  background:color-mix(in srgb, var(--surface) 82%, transparent); color:var(--ink-2);
+}
+.lb-attrib a{color:inherit}
+.lb-note{
+  position:absolute; left:50%; top:14px; transform:translateX(-50%); max-width:min(520px,88%);
+  font-size:12.5px; line-height:1.45; text-align:center; padding:9px 14px;
+  background:var(--warn-bg); color:var(--ink); border:1px solid var(--warn); border-radius:2px;
+}
+.lb-note[hidden]{display:none}
+@media (max-width:560px){
+  .lb{padding:10px}
+  .lb-note{top:auto; bottom:10px; font-size:11.5px; padding:7px 10px; max-width:94%}
+  .lb-head h3{font-size:17px}
+}
+.lb-foot{
+  display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center;
+  padding:11px 16px; border-top:1px solid var(--line);
+}
+
+/* ---------- controls ---------- */
+.controls{
+  position:sticky; top:0; z-index:20; background:color-mix(in srgb,var(--ground) 92%,transparent);
+  backdrop-filter:blur(8px); border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  padding:12px 0; margin-bottom:26px;
+}
+.ctl-row{display:flex; flex-wrap:wrap; gap:16px 26px; align-items:center}
+.ctl-group{display:flex; align-items:center; gap:7px; flex-wrap:wrap}
+.ctl-label{
+  font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ink-3); margin-right:2px;
+}
+.chip{
+  font:500 12.5px/1 "Karla",sans-serif; padding:6px 11px; border-radius:999px; cursor:pointer;
+  border:1px solid var(--line-strong); background:transparent; color:var(--ink-2);
+  transition:background .12s,color .12s,border-color .12s;
+}
+.chip:hover{border-color:var(--ink-3); color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink); color:var(--ground); border-color:var(--ink)}
+.count{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-3); margin-left:auto}
+
+/* ---------- cards ---------- */
+.list{display:flex; flex-direction:column; gap:14px}
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:2px;
+  display:grid; grid-template-columns:132px minmax(0,1fr); box-shadow:var(--shadow);
+  scroll-margin-top:80px;
+}
+.card.flash{animation:flash 1.4s ease}
+@keyframes flash{0%,40%{border-color:var(--accent)}100%{border-color:var(--line)}}
+@media (prefers-reduced-motion:reduce){ .card.flash{animation:none} .dot circle{transition:none} }
+@media (max-width:660px){ .card{grid-template-columns:minmax(0,1fr)} }
+
+.rail{
+  border-right:1px solid var(--line); padding:18px 16px; display:flex; flex-direction:column; gap:14px;
+}
+@media (max-width:660px){ .rail{border-right:0; border-bottom:1px solid var(--line); flex-direction:row; gap:26px} }
+.stat-k{
+  font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--ink-3); display:block; margin-bottom:3px;
+}
+.stat-v{
+  font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; font-weight:500;
+  font-size:20px; line-height:1.1; color:var(--ink); display:block;
+}
+.stat-v .u{font-size:11px; font-weight:400; color:var(--ink-3); margin-left:2px}
+.stat-sub{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--ink-3); display:block; margin-top:2px}
+.ride .stat-v{color:var(--accent)}
+
+.body{padding:18px 20px 20px; min-width:0}
+.card h2{
+  font-family:"Newsreader",Georgia,serif; font-weight:600; font-size:23px; line-height:1.15;
+  margin:0 0 3px; letter-spacing:-.01em; text-wrap:balance;
+}
+.where{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.05em; color:var(--ink-3);
+  margin:0 0 12px;
+}
+.tags{display:flex; flex-wrap:wrap; gap:6px; margin:0 0 12px}
+.tag{
+  font:500 11px/1 "Karla",sans-serif; letter-spacing:.02em; padding:4px 8px; border-radius:2px;
+  border:1px solid currentColor; opacity:.95;
+}
+.tag.water{color:var(--t-water)} .tag.polder{color:var(--t-polder)} .tag.dune{color:var(--t-dune)}
+.tag.forest{color:var(--t-forest)} .tag.heath{color:var(--t-heath)}
+.tag.kids{color:var(--ink-2); border-style:dashed}
+.desc{margin:0 0 12px; font-size:15px; color:var(--ink-2); max-width:64ch}
+.note{
+  font-size:13.5px; line-height:1.5; color:var(--ink-2); background:var(--surface-2);
+  border-left:2px solid var(--line-strong); padding:9px 12px; margin:0 0 12px; max-width:70ch;
+}
+.note.alert{background:var(--warn-bg); border-left-color:var(--warn); color:var(--ink)}
+.note b{font-weight:700; color:var(--ink)}
+.foot{display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; padding-top:11px; border-top:1px solid var(--line)}
+.src{font-size:13px; text-decoration:none; border-bottom:1px solid color-mix(in srgb,var(--accent) 45%,transparent); color:var(--accent); padding-bottom:1px}
+.src:hover{border-bottom-color:var(--accent)}
+.coord{
+  font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--ink-3); margin-left:auto;
+  background:none; border:0; cursor:pointer; padding:2px 0; letter-spacing:.02em;
+}
+.coord:hover{color:var(--accent)}
+.files{display:flex; flex-wrap:wrap; gap:7px 14px; align-items:center; padding-top:9px}
+.files-k{
+  font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--ink-3);
+}
+.badge{
+  font:600 10.5px/1 "IBM Plex Mono",monospace; letter-spacing:.04em; padding:4px 7px; border-radius:2px;
+  border:1px solid currentColor;
+}
+.badge.free{color:var(--t-forest)}
+.badge.paid{color:var(--warn)}
+.badge.none{color:var(--ink-3)}
+.dl{font-size:12.5px; color:var(--ink-2); text-decoration:none; border-bottom:1px dotted var(--line-strong); padding-bottom:1px}
+.dl:hover{color:var(--accent); border-bottom-color:var(--accent)}
+.dl.osm{color:var(--t-water); border-bottom-color:color-mix(in srgb,var(--t-water) 40%,transparent)}
+
+/* ---------- track thumbnail ---------- */
+.split{display:flex; gap:22px; align-items:flex-start}
+.split .col{flex:1 1 auto; min-width:0}
+@media (max-width:760px){ .split{flex-direction:column-reverse; gap:14px} }
+.track{
+  flex:0 0 172px; margin:0; border:1px solid var(--line); background:var(--surface-2);
+  border-radius:2px; padding:8px 8px 6px;
+}
+@media (max-width:760px){ .track{flex:0 0 auto; align-self:flex-start; width:172px} }
+.track svg{display:block; width:100%; height:auto}
+.track .line{fill:none; stroke:var(--accent); stroke-width:3.4; stroke-linejoin:round; stroke-linecap:round}
+.track .startpin{fill:var(--surface); stroke:var(--ink); stroke-width:2.6}
+.track .bar{stroke:var(--ink-2); stroke-width:2}
+.track .lbl{font-family:"IBM Plex Mono",monospace; font-size:9px; fill:var(--ink-3)}
+.track .n{fill:var(--ink-3)}
+.track button.open{
+  display:block; width:100%; padding:0; margin:0; border:0; background:none; cursor:zoom-in;
+}
+.track button.open:hover .line{stroke-width:4.2}
+.expand{
+  font:500 10px/1 "IBM Plex Mono",monospace; letter-spacing:.08em; color:var(--ink-3);
+  text-transform:uppercase;
+}
+.track button.open:hover + figcaption .expand{color:var(--accent)}
+.track figcaption{
+  font-family:"IBM Plex Mono",monospace; font-size:9.5px; letter-spacing:.05em; color:var(--ink-3);
+  margin-top:5px; display:flex; justify-content:space-between; gap:6px;
+}
+
+/* ---------- closing ---------- */
+.closing{margin-top:44px; border-top:1px solid var(--line-strong); padding-top:26px}
+.closing h3{
+  font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:500; margin:0 0 14px;
+}
+.closing ul{margin:0; padding-left:18px; display:flex; flex-direction:column; gap:9px; max-width:70ch}
+.closing li{font-size:14.5px; color:var(--ink-2)}
+.closing b{color:var(--ink); font-weight:700}
+.closing a{color:var(--accent)}
+.empty{padding:40px 0; color:var(--ink-3); font-family:"IBM Plex Mono",monospace; font-size:13px}
 </style>
+
 </head>
 <body>
-<header>
-  <h1>Walking Routes around Amsterdam</h1>
-  <span class="sub">GPX tracks &mdash; click a route to zoom, click the swatch to toggle</span>
-</header>
-<div id="layout">
-  <div id="sidebar">
-    <div id="controls">
-      <button id="fit-all">Fit all</button>
-      <button id="show-all">Show all</button>
-      <button id="hide-all">Hide all</button>
+<div class="wrap">
+  <header class="mast">
+    <div>
+      <p class="eyebrow">Walks · 5–15 km · under two hours by bike</p>
+      <h1>Lock the bike,<br><em>and walk.</em></h1>
+      <p class="lede">Nineteen documented walking routes of 5 to 15 km, every one of them within cycling reach of Amstelveen — the furthest trailhead sits at <strong style="white-space:nowrap">29.6 km</strong>, comfortably inside two hours at an easy pace.</p>
+      <p class="meta-note">Cycling distances are measured from central Amstelveen using a bicycle profile on OpenStreetMap data (BRouter); ride times assume 16 km/h. The <a href="https://routeplanner.fietsersbond.nl/" target="_blank" rel="noopener">Fietsersbond route planner</a> gives better cycling routes — click a trailhead’s coordinates to copy them and plan the ride there.</p>
     </div>
-    <div id="route-list"></div>
+    <figure class="radar">
+      <svg id="radar" viewBox="0 0 340 340" role="img" aria-label="Schematic map of the trailheads around Amstelveen"></svg>
+      <figcaption class="radar-cap"><span>Rings: 10 / 20 / 30 km by bike</span><span>N ↑</span></figcaption>
+    </figure>
+  </header>
+
+  <div class="controls">
+    <div class="ctl-row">
+      <div class="ctl-group">
+        <span class="ctl-label">Landscape</span>
+        <button class="chip" data-filter="terrain" data-value="polder">Polder</button>
+        <button class="chip" data-filter="terrain" data-value="water">Water &amp; reed</button>
+        <button class="chip" data-filter="terrain" data-value="dune">Dunes</button>
+        <button class="chip" data-filter="terrain" data-value="forest">Woods &amp; estates</button>
+        <button class="chip" data-filter="terrain" data-value="heath">Heath</button>
+      </div>
+      <div class="ctl-group">
+        <span class="ctl-label">Filter</span>
+        <button class="chip" data-filter="ride" data-value="45">Ride ≤ 45 min</button>
+        <button class="chip" data-filter="gpx" data-value="free">Free GPX</button>
+        <button class="chip" data-filter="kids" data-value="1">Good with kids</button>
+      </div>
+      <span class="count" id="count"></span>
+    </div>
   </div>
-  <div id="map"></div>
+
+  <main class="list" id="list"></main>
+
+  <div class="lb" id="lb" hidden>
+    <div class="lb-panel" role="dialog" aria-modal="true" aria-labelledby="lb-title">
+      <div class="lb-head">
+        <h3 id="lb-title"></h3><span class="lb-sub" id="lb-sub"></span>
+        <button class="lb-x" id="lb-x">Close</button>
+      </div>
+      <div class="lb-map" id="lb-map">
+        <div class="lb-tiles" id="lb-tiles"></div>
+        <svg class="lb-ovl" id="lb-ovl"></svg>
+        <p class="lb-note" id="lb-note" hidden></p>
+        <div class="lb-zoom">
+          <button id="lb-in" aria-label="Zoom in">+</button>
+          <button id="lb-out" aria-label="Zoom out">−</button>
+        </div>
+        <div class="lb-attrib">Tiles &amp; data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors</div>
+      </div>
+      <div class="lb-foot" id="lb-foot"></div>
+    </div>
+  </div>
+
+  <section class="closing">
+    <h3>Before you set off</h3>
+    <ul>
+      <li><b>Botshol and Waverveen are out this year.</b> The fine routes at Botshol (12 km) and Trage Tocht Waverveen (15 km) are closed for embankment repairs — sources put the reopening no earlier than late 2026, possibly mid-2027. Vinkeveen and Abcoude below are the stand-ins.</li>
+      <li><b>Breeding season closes paths.</b> Peat-meadow and marsh reserves shut roughly 15 March – 15 June (Het Twiske until 15 July). At Loenen, the Vrederijk estate closes 1 April – 31 July. Noted on each route.</li>
+      <li><b>The Waterleidingduinen charge admission.</b> €1.50 day ticket or €10 annual card from age 18, children free; no dogs and no bikes inside, but there are free bike racks at every entrance. During the rut (September–November) keep well clear of the fallow deer.</li>
+      <li><b>Anything north of the IJ needs the ferry.</b> Zunderdorp, Broek in Waterland and Het Twiske all go via the free ferry behind Amsterdam Centraal (Buiksloterweg or IJplein, 24/7, bikes free). That crossing is included in the cycling distance.</li>
+      <li><b>GPX access is uneven, and that is on the publishers.</b> Natuurmonumenten, Wandelnet, the AWD, Laag Holland and the Plaece-based tourist sites give the track away free. Wandelzoekpagina — which owns the <i>Trage Tocht</i> and <i>Kort en Prachtig</i> series, six routes here — puts GPX and the route description behind €13.49 a year or €2.49 for a single route. Where that bites, each card links a free lookalike track on gps-route.org, but read the distance: it is a different route design, not the same walk.</li>
+      <li><b>Ten of the nineteen carry a real track.</b> Where a card shows a shape, it was parsed from that route's own GPX — projected, simplified and then re-measured as a check. All ten came back within a few hundred metres of their published length, which is the useful part: a shape that measures right is a shape you can trust. Click any shape for the full map: the track is drawn over OpenStreetMap tiles, and you can pan and zoom. If the tiles cannot load — say, offline — the map still opens with the bare track drawn large and clean. The nine without a shape are the ones whose GPX is paywalled or does not exist.</li>
+      <li><b>Trage Tocht routes are not waymarked.</b> Download the GPX or use the WandelZapp app; and in the wet months a <i>laarzenpad</i> (boots path) is exactly that.</li>
+    </ul>
+  </section>
 </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
+const TRACKS = {"awd":{"d":"M190 66.4 L188.7 66.5 L188.5 68.1 L183.1 68.7 L179.4 67.5 L175.9 64.3 L173 62.8 L172.2 63.7 L169.6 61.8 L166.3 58.3 L165 58.5 L164.5 60.2 L164.9 71 L159.5 69.3 L137.4 73.4 L127.2 67.3 L117.4 67.6 L113.7 68.9 L108.4 68.4 L102.4 71.7 L97.8 69.5 L111.8 54.1 L113.4 49.5 L116.3 45.6 L110.2 42.9 L104.8 42.2 L102 43 L97.1 41.4 L90.8 37.2 L86.6 38.8 L79.7 48.4 L78.5 51.8 L73.9 56.8 L72.9 64.6 L65 65.1 L57.6 68.6 L55.9 68 L51.2 71 L48.1 79.3 L48.6 80.3 L58.9 79.8 L58.9 81.8 L60.9 83.9 L58.9 85.5 L60.6 87.5 L60.1 88.5 L54.8 94.4 L45.6 97.7 L29.3 89.3 L17.8 92.7 L10.2 102.4 L10 105.4 L11.1 106.1 L18.9 105.5 L23.1 107.5 L25.9 107.4 L28.2 104.4 L53.3 108.6 L52.9 110 L56.3 108.9 L57.7 110.1 L56.8 111.5 L65.7 120.2 L70.2 128.4 L73.3 130.4 L82.2 141.3 L88.9 146.8 L91.2 144.8 L100.8 154.4 L109 158.2 L115.6 162.8 L126.5 151 L130.6 144.5 L131.3 140.9 L134 137.7 L136.8 141.6 L145.8 128.9 L152.2 126 L159.4 119.3 L163.9 107.3 L170.6 95 L173.9 75.4 L182.2 69.1 L187.3 68.9","start":[190.0,66.4],"closed":true,"ll":[[52.34604,4.58294],[52.34602,4.58263],[52.34577,4.58258],[52.34569,4.58125],[52.34587,4.58034],[52.34635,4.57946],[52.34658,4.57876],[52.34645,4.57856],[52.34673,4.57791],[52.34727,4.57711],[52.34724,4.5768],[52.34697,4.57666],[52.34534,4.57676],[52.34559,4.57542],[52.34498,4.57],[52.3459,4.56748],[52.34585,4.56508],[52.34566,4.56415],[52.34574,4.56286],[52.34524,4.56138],[52.34557,4.56025],[52.3479,4.56369],[52.34859,4.56408],[52.34919,4.56481],[52.34959,4.56331],[52.3497,4.56196],[52.34959,4.56127],[52.34982,4.56008],[52.35046,4.55852],[52.35022,4.55749],[52.34877,4.5558],[52.34824,4.5555],[52.34749,4.55435],[52.34631,4.55411],[52.34624,4.55217],[52.3457,4.55035],[52.3458,4.54993],[52.34534,4.54877],[52.34408,4.548],[52.34394,4.54813],[52.34401,4.55066],[52.34371,4.55067],[52.34338,4.55115],[52.34315,4.55068],[52.34285,4.55109],[52.34269,4.55097],[52.34179,4.54967],[52.3413,4.54739],[52.34256,4.54337],[52.34205,4.54054],[52.34058,4.53868],[52.34014,4.53863],[52.34002,4.5389],[52.34012,4.54081],[52.33982,4.54185],[52.33982,4.54254],[52.34029,4.5431],[52.33965,4.54928],[52.33944,4.54919],[52.3396,4.55002],[52.33942,4.55037],[52.33921,4.55016],[52.33789,4.55234],[52.33665,4.55346],[52.33634,4.55421],[52.33469,4.55641],[52.33386,4.55805],[52.33416,4.55861],[52.33271,4.56097],[52.33214,4.56301],[52.33143,4.56463],[52.33323,4.56732],[52.33421,4.56832],[52.33476,4.56849],[52.33525,4.56916],[52.33465,4.56984],[52.33658,4.57206],[52.33702,4.57363],[52.33802,4.57542],[52.33984,4.57652],[52.34171,4.57817],[52.34467,4.57899],[52.34563,4.58103],[52.34566,4.58229]],"bbox":[52.33143,4.53863,52.35046,4.58294],"km":10.0,"bar":59.7,"barLabel":"1 km","n":84,"raw":164},"bos":{"d":"M189 15.5 L180.8 30 L166.6 36.8 L149.1 39.8 L139.4 38.5 L127.5 40.6 L120.3 39 L109.9 42.3 L83.7 65.3 L85.3 69.5 L84.6 70.8 L65.5 81.8 L57.2 84.6 L54 88.8 L47.8 91.6 L39.3 90 L36.1 86.4 L34.9 80.8 L37.7 74.9 L42.5 71.8 L38.4 63.1 L43.1 60.6 L46.5 52.7 L36.3 51 L33.7 53 L32.3 57.1 L24.7 57.7 L25 66.2 L27.7 74.1 L21.4 75.7 L18.8 80.4 L17.1 90.5 L11.4 89.5 L10 95.9 L12 100.6 L17.3 104.5 L19 107.9 L18.6 114.7 L19.8 117.2 L18.8 123 L20.9 132 L23.7 134.6 L32.5 136.8 L39.3 140.9 L48.7 150.4 L50 155.5 L57 155.4 L71.6 163.2 L74.3 167.2 L87.4 175.5 L110.4 184.5 L116.5 173 L115.6 166.5 L111.8 158.9 L110.4 151.6 L111.6 147.8 L116.8 142.3 L116 141.3 L102.7 141.4 L103.1 122.8 L105.7 116.1 L106 106.1 L104.1 102.3 L107.9 84.3 L113.5 80.8 L121.7 80.4 L123.3 75.6 L126 73.5 L141.9 72.4 L144 70.4 L140 65.8 L139.8 62.4 L140 65.8 L143.8 70.3 L140.2 65.5 L141.2 60.2 L147.4 55.3 L150.8 55.5 L154.8 58.9 L158 39.8 L173.6 35.2 L180.9 31 L184.4 27 L190 15.5","start":[189.0,15.5],"closed":true,"ll":[[52.32683,4.85482],[52.32506,4.85319],[52.32423,4.85038],[52.32387,4.84691],[52.32402,4.84499],[52.32377,4.84263],[52.32396,4.84121],[52.32356,4.83914],[52.32075,4.83396],[52.32024,4.83427],[52.32009,4.83413],[52.31874,4.83035],[52.3184,4.82871],[52.31789,4.82806],[52.31755,4.82683],[52.31775,4.82515],[52.31818,4.82452],[52.31887,4.82428],[52.31958,4.82483],[52.31996,4.82579],[52.32102,4.82498],[52.32133,4.8259],[52.32229,4.82659],[52.3225,4.82456],[52.32225,4.82405],[52.32175,4.82377],[52.32168,4.82227],[52.32065,4.82233],[52.31968,4.82286],[52.31949,4.82161],[52.31891,4.82109],[52.31768,4.82076],[52.31781,4.81962],[52.31702,4.81935],[52.31645,4.81975],[52.31598,4.82079],[52.31556,4.82113],[52.31473,4.82106],[52.31443,4.8213],[52.31372,4.8211],[52.31262,4.8215],[52.31231,4.82207],[52.31204,4.82381],[52.31154,4.82515],[52.31038,4.82702],[52.30976,4.82727],[52.30977,4.82867],[52.30882,4.83155],[52.30833,4.83208],[52.30732,4.83468],[52.30622,4.83925],[52.30762,4.84045],[52.30842,4.84028],[52.30935,4.83951],[52.31024,4.83925],[52.3107,4.83948],[52.31137,4.84051],[52.31149,4.84034],[52.31148,4.83771],[52.31375,4.83779],[52.31456,4.83831],[52.31578,4.83836],[52.31625,4.83799],[52.31844,4.83875],[52.31886,4.83986],[52.31892,4.84148],[52.3195,4.8418],[52.31975,4.84233],[52.31989,4.84548],[52.32013,4.84589],[52.32069,4.8451],[52.32111,4.84506],[52.32069,4.8451],[52.32015,4.84586],[52.32073,4.84515],[52.32138,4.84535],[52.32198,4.84657],[52.32195,4.84724],[52.32154,4.84804],[52.32387,4.84868],[52.32443,4.85176],[52.32494,4.8532],[52.32543,4.85391],[52.32683,4.85501]],"bbox":[52.30622,4.81935,52.32683,4.85501],"km":10.0,"bar":74.2,"barLabel":"1 km","n":84,"raw":527},"broek":{"d":"M189.1 71.9 L186.4 72.8 L185 71.6 L180.7 74.1 L184.9 78.9 L190 82 L188.6 84.5 L183.1 88.3 L176.5 85.2 L165.2 84.1 L134.9 97.4 L118.5 109.4 L99.4 118.4 L72.4 120.4 L54.8 117.9 L51.5 119.7 L27.1 140.9 L14.1 148.6 L14.8 149.8 L13.9 150.2 L12.7 147.9 L10 136.2 L11.3 128.7 L10.1 124.3 L10.7 52.6 L15.2 52.6 L15 86.4 L20.3 87.6 L24.1 91 L66.4 92.8 L69.4 92.7 L70.2 91.2 L71 92.8 L111.4 93.4 L112 84 L113.1 84.1 L113.2 82.9 L126.1 83.6 L126.3 75.5 L127.8 75.6 L128.3 71.9 L133.7 72.1 L134.1 68.3 L130.9 51.7 L155.3 52.5 L155.5 49.8 L168.5 49.8 L171.8 54.3 L171.9 57.4 L173.5 57.8 L171.9 67.6 L174.7 67.2 L175.6 69.3 L181.4 65.9 L189.1 71.9","start":[189.1,71.9],"closed":true,"ll":[[52.4355,4.99709],[52.43536,4.99638],[52.43555,4.99603],[52.43516,4.99493],[52.43441,4.996],[52.43391,4.99731],[52.43352,4.99695],[52.43293,4.99555],[52.43342,4.99385],[52.43359,4.99096],[52.4315,4.9832],[52.42961,4.97899],[52.4282,4.97411],[52.42788,4.9672],[52.42827,4.96269],[52.428,4.96184],[52.42466,4.9556],[52.42344,4.95228],[52.42326,4.95244],[52.42319,4.95223],[52.42357,4.95191],[52.4254,4.95122],[52.42657,4.95155],[52.42727,4.95124],[52.43853,4.95141],[52.43854,4.95254],[52.43323,4.95249],[52.43304,4.95385],[52.43249,4.95483],[52.43222,4.96567],[52.43223,4.96643],[52.43246,4.96664],[52.43223,4.96684],[52.43212,4.97719],[52.4336,4.97735],[52.43358,4.97761],[52.43377,4.97763],[52.43367,4.98095],[52.43494,4.98101],[52.43493,4.98137],[52.4355,4.9815],[52.43547,4.98289],[52.43607,4.98299],[52.43868,4.98219],[52.43855,4.98842],[52.43898,4.98846],[52.43897,4.99181],[52.43827,4.99266],[52.43779,4.99268],[52.43772,4.99308],[52.43618,4.99269],[52.43625,4.99339],[52.43592,4.99363],[52.43645,4.99511],[52.4355,4.99709]],"bbox":[52.42319,4.95122,52.43898,4.99731],"km":10.6,"bar":57.5,"barLabel":"1 km","n":55,"raw":278},"heide":{"d":"M168.2 187.7 L162.5 190 L142.2 166.9 L139.6 162.2 L128.7 154.9 L102.6 160 L93.8 159.6 L69.5 144.1 L62 144.4 L58.1 152.1 L50 147.6 L20.6 137.1 L34.5 121.6 L33.4 119.8 L67 83.9 L44 78.8 L36.3 74.3 L32.6 74.7 L31.9 66.7 L42.9 40.4 L29.9 10 L45.2 11.3 L120.3 65.8 L133 65.6 L146.6 67.5 L155.2 63.9 L160.3 63.7 L158.2 74.3 L153.4 78.7 L151.7 88.7 L171.7 103.8 L164.7 125.9 L172.3 126.7 L173.6 144 L176.1 154 L173.8 166.4 L179.4 170.4 L171.7 174.9 L168.8 178.5 L168.2 187.7","start":[168.2,187.7],"closed":true,"ll":[[52.24142,5.19913],[52.24117,5.19813],[52.24365,5.19459],[52.24416,5.19414],[52.24494,5.19224],[52.24439,5.1877],[52.24443,5.18616],[52.2461,5.18193],[52.24607,5.18062],[52.24524,5.17994],[52.24572,5.17853],[52.24685,5.17341],[52.24852,5.17584],[52.24871,5.17564],[52.25256,5.18149],[52.25311,5.17749],[52.25359,5.17614],[52.25355,5.1755],[52.25441,5.17538],[52.25724,5.1773],[52.2605,5.17503],[52.26036,5.1777],[52.25451,5.19079],[52.25453,5.19299],[52.25432,5.19536],[52.25471,5.19686],[52.25473,5.19775],[52.2536,5.19738],[52.25312,5.19655],[52.25205,5.19626],[52.25043,5.19973],[52.24805,5.19852],[52.24797,5.19984],[52.24611,5.20006],[52.24504,5.2005],[52.2437,5.2001],[52.24327,5.20108],[52.24279,5.19974],[52.24241,5.19923],[52.24142,5.19913]],"bbox":[52.24117,5.17341,52.2605,5.20108],"km":7.9,"bar":42.1,"barLabel":"500 m","n":40,"raw":232},"jonker":{"d":"M48.7 30.8 L46.5 30.8 L46.2 29.6 L48.7 28.4 L44.4 19.2 L39 21.4 L35 11.8 L34.2 11.7 L31.8 12.6 L31 16.5 L35.4 23.2 L37.2 27.9 L37.3 32.1 L32.1 35.2 L27.7 34.3 L25.7 31.9 L22.4 33 L19.9 32.6 L11.8 37.7 L10 51.9 L11.7 54.5 L18.4 54.5 L19.2 52.6 L22.5 52.3 L24.6 48.8 L29.4 45.6 L30.1 46.7 L26.3 50 L27.1 62.7 L24.1 87.4 L24.7 90.7 L63.8 95 L63 99.5 L66.7 118.2 L118.3 111.1 L126.5 117.9 L132.2 147 L165.8 151.7 L175.3 148.4 L174.9 151.2 L173 152.4 L174.5 152.4 L174.8 153.3 L172.8 168.1 L172.4 182.5 L169.6 186.4 L165.7 188.5 L168.5 189.8 L171.1 189.4 L190 179.7 L185.1 168.8 L177.3 171.4 L174.9 166.1 L180.4 131.6 L183.2 124.5 L184 111.8 L183.4 106.8 L184.6 85 L179.9 66.5 L133.8 30.6 L125.3 30.4 L122.5 25.7 L120.6 24.8 L116.5 27.6 L114 28 L107.4 27.6 L96.2 24 L89.8 23.4 L88.8 19.2 L78.8 10.2 L59.6 23.5 L58.8 26.1 L53.2 30 L48.7 30.8","start":[48.7,30.8],"closed":true,"ll":[[52.17905,4.83404],[52.17905,4.83348],[52.17924,4.83339],[52.17943,4.83403],[52.18088,4.83293],[52.18054,4.83156],[52.18205,4.83055],[52.18206,4.83034],[52.18192,4.82975],[52.18131,4.82953],[52.18025,4.83065],[52.17951,4.83111],[52.17886,4.83114],[52.17836,4.82982],[52.17851,4.82868],[52.17889,4.82819],[52.17871,4.82735],[52.17878,4.82671],[52.17798,4.82463],[52.17574,4.82418],[52.17533,4.82461],[52.17533,4.82633],[52.17562,4.82653],[52.17567,4.82736],[52.17622,4.8279],[52.17674,4.82912],[52.17655,4.8293],[52.17603,4.82834],[52.17404,4.82855],[52.17016,4.82777],[52.16963,4.82792],[52.16896,4.83788],[52.16825,4.83769],[52.16531,4.83863],[52.16642,4.85177],[52.16536,4.85386],[52.16079,4.85532],[52.16004,4.86387],[52.16057,4.86629],[52.16013,4.86619],[52.15993,4.86569],[52.15993,4.86609],[52.15979,4.86615],[52.15747,4.86566],[52.15519,4.86554],[52.15459,4.86482],[52.15426,4.86383],[52.15406,4.86454],[52.15412,4.86521],[52.15563,4.87003],[52.15735,4.86877],[52.15694,4.86679],[52.15778,4.86618],[52.1632,4.86758],[52.16432,4.86829],[52.16632,4.86851],[52.16711,4.86835],[52.17054,4.86866],[52.17345,4.86747],[52.17908,4.85572],[52.17912,4.85355],[52.17987,4.85284],[52.18,4.85234],[52.17956,4.85132],[52.1795,4.85068],[52.17956,4.84899],[52.18012,4.84613],[52.18022,4.8445],[52.18089,4.84426],[52.18229,4.8417],[52.1802,4.83682],[52.17979,4.8366],[52.17918,4.83518],[52.17905,4.83405]],"bbox":[52.15406,4.82418,52.18229,4.87003],"km":12.9,"bar":57.5,"barLabel":"1 km","n":74,"raw":234},"konik":{"d":"M157.8 141.7 L162.4 134.3 L157.7 133.2 L162.1 121.6 L157.3 117.6 L158.9 114.5 L158.6 110.1 L160.4 107.1 L164.8 104.4 L175.4 106.2 L175.5 100.4 L178.8 98.1 L184.4 89.6 L181.2 83.1 L174.5 81.7 L173.4 78.9 L190 66.4 L182.2 50.3 L175.6 48.3 L167.1 52.7 L161.4 52.9 L156.6 55.4 L148.7 54.9 L139 59 L107 47.6 L100.5 43.6 L96.1 36.7 L83 42 L79.3 42.1 L67.5 51 L60.6 51.6 L42.1 61.1 L39.9 67.9 L42.3 73.7 L35.4 80.1 L36.3 82.1 L34.5 83.9 L36.3 87.2 L28.8 110.1 L25 115.5 L13.9 122.1 L10 127.7 L24.2 131.4 L30.5 145 L49.6 149.1 L53.4 147.8 L69.4 149.8 L78.5 157.1 L79.5 162.3 L82.7 163.3 L97.8 159.8 L103.8 153.9 L122.7 153.9 L143.2 143.9 L157.5 141.9","start":[157.8,141.7],"closed":true,"ll":[[52.43147,4.62288],[52.43237,4.6238],[52.43251,4.62286],[52.43393,4.62374],[52.43442,4.62279],[52.43479,4.6231],[52.43534,4.62304],[52.4357,4.62339],[52.43604,4.62427],[52.43581,4.62639],[52.43652,4.6264],[52.43681,4.62706],[52.43784,4.62819],[52.43863,4.62753],[52.4388,4.62621],[52.43915,4.62599],[52.44067,4.62929],[52.44265,4.62774],[52.44288,4.62643],[52.44235,4.62473],[52.44232,4.62359],[52.44202,4.62265],[52.44208,4.62107],[52.44157,4.61914],[52.44297,4.61278],[52.44346,4.61147],[52.4443,4.6106],[52.44366,4.608],[52.44364,4.60726],[52.44255,4.60492],[52.44248,4.60353],[52.44133,4.59985],[52.44049,4.59942],[52.43979,4.59989],[52.439,4.59851],[52.43875,4.59871],[52.43854,4.59835],[52.43814,4.59869],[52.43534,4.59721],[52.43467,4.59645],[52.43387,4.59423],[52.43318,4.59346],[52.43273,4.59629],[52.43108,4.59753],[52.43057,4.60135],[52.43073,4.60211],[52.43049,4.60528],[52.4296,4.6071],[52.42896,4.60729],[52.42884,4.60794],[52.42927,4.61095],[52.42999,4.61214],[52.42998,4.61589],[52.4312,4.61997],[52.43145,4.62283]],"bbox":[52.42884,4.59346,52.4443,4.62929],"km":7.5,"bar":74.0,"barLabel":"1 km","n":55,"raw":244},"naardermeer":{"d":"M190 60.7 L155.1 34.4 L153.5 37.2 L157.3 49.5 L156.6 56.5 L150.3 62.7 L147.4 70.6 L141.2 69 L126.7 117 L119.1 123.3 L113.1 124.5 L94.4 120.6 L77.2 120.1 L74.1 118.1 L58.5 92.3 L55.3 90.4 L59.6 83.4 L60.6 76.8 L58.9 74.9 L63.8 69 L58.9 74.9 L60.6 76.9 L59.6 83.5 L55.3 90.4 L32.2 80.1 L26.6 93.8 L12.5 89.2 L25.1 92.6 L27.8 95.7 L10 138.6 L63.2 165.6 L151 125.2 L184.9 82.1 L190 63.7","start":[190.0,60.7],"closed":true,"ll":[[52.28423,5.14196],[52.28653,5.137],[52.28628,5.13677],[52.28521,5.13732],[52.2846,5.13721],[52.28405,5.13631],[52.28336,5.1359],[52.2835,5.13502],[52.2793,5.13296],[52.27875,5.13188],[52.27864,5.13104],[52.27898,5.12837],[52.27903,5.12593],[52.27921,5.12549],[52.28146,5.12328],[52.28163,5.12283],[52.28224,5.12344],[52.28281,5.12357],[52.28299,5.12334],[52.2835,5.12403],[52.28299,5.12333],[52.28281,5.12358],[52.28223,5.12344],[52.28162,5.12283],[52.28253,5.11954],[52.28134,5.11875],[52.28173,5.11675],[52.28144,5.11853],[52.28117,5.11892],[52.27741,5.11639],[52.27505,5.12395],[52.27859,5.13641],[52.28235,5.14123],[52.28396,5.14196]],"bbox":[52.27505,5.11639,52.28653,5.14196],"km":6.1,"bar":51.7,"barLabel":"500 m","n":34,"raw":107},"oppad":{"d":"M180.7 108.4 L155.4 93.8 L150 89.3 L141.6 84.4 L140.2 86.8 L117.9 74.3 L116.6 72.8 L95.3 59.3 L74 76.4 L72.3 80.7 L68.5 86.9 L67.4 87 L65.7 89.4 L61.6 85.8 L10 132.3 L29.6 140.7 L174.2 136.4 L182.4 122.9 L183 121 L181.8 119.5 L190 118.5 L187.9 112.7 L185.2 109.8 L181.5 108.8","start":[180.7,108.4],"closed":true,"ll":[[52.22143,5.12154],[52.22427,5.11351],[52.22515,5.11182],[52.2261,5.10915],[52.22563,5.10872],[52.22807,5.10166],[52.22837,5.10125],[52.231,5.09451],[52.22767,5.08778],[52.22682,5.08725],[52.22561,5.08602],[52.22559,5.0857],[52.22513,5.08514],[52.22583,5.08386],[52.21676,5.06753],[52.21512,5.07373],[52.21595,5.11947],[52.21859,5.12207],[52.21897,5.12225],[52.21926,5.12187],[52.21944,5.12447],[52.22059,5.12382],[52.22115,5.12295],[52.22135,5.12178]],"bbox":[52.21512,5.06753,52.231,5.12447],"km":9.3,"bar":46.4,"barLabel":"1 km","n":24,"raw":85},"vinkeveen":{"d":"M73.1 92.5 L74.1 90.9 L76.2 97.2 L82.4 122.6 L103.7 186.5 L103.9 190 L115.3 184.2 L182.2 139.1 L178.4 132.9 L170.2 128.4 L164.8 122.1 L165.4 116.7 L164.3 110.3 L151.6 86.5 L147.7 85.7 L132.2 87.4 L128.5 86.8 L126.7 85 L125.4 78 L127 74.8 L131.8 70.5 L135.4 64.2 L136.9 53.5 L122.9 34.8 L113.6 33.3 L107.5 30.2 L102.5 15.9 L97.5 10 L89.8 13.8 L78.8 26.8 L71 24.4 L57.2 23.8 L55.3 25 L47.6 25.3 L43.5 27.9 L41 33.3 L45.1 46.2 L36.9 65.3 L31.9 73.1 L20.1 74.3 L17.8 77 L26.7 79.7 L36.1 75.2 L41.3 76.7 L47.2 86.4 L47.9 96 L56.1 108.4 L59.7 107.8 L73.2 92.1","start":[73.1,92.5],"closed":true,"ll":[[52.25186,4.96706],[52.25207,4.96728],[52.25123,4.96773],[52.24783,4.96908],[52.23925,4.97372],[52.23878,4.97376],[52.23956,4.97623],[52.24561,4.9908],[52.24644,4.98998],[52.24704,4.98818],[52.24788,4.98701],[52.24861,4.98715],[52.24947,4.9869],[52.25266,4.98413],[52.25277,4.98329],[52.25254,4.97991],[52.25262,4.97912],[52.25286,4.97872],[52.2538,4.97844],[52.25423,4.97878],[52.2548,4.97984],[52.25565,4.98061],[52.25709,4.98095],[52.25959,4.97789],[52.25979,4.97588],[52.26021,4.97454],[52.26213,4.97346],[52.26292,4.97236],[52.26241,4.97068],[52.26067,4.9683],[52.26099,4.96661],[52.26107,4.96359],[52.26091,4.96318],[52.26087,4.9615],[52.26052,4.96061],[52.2598,4.96007],[52.25807,4.96096],[52.2555,4.95917],[52.25446,4.9581],[52.25429,4.95553],[52.25393,4.95502],[52.25357,4.95695],[52.25418,4.95901],[52.25397,4.96014],[52.25267,4.96143],[52.25138,4.96157],[52.24973,4.96336],[52.24981,4.96415],[52.25191,4.96709]],"bbox":[52.23878,4.95502,52.26292,4.9908],"km":9.0,"bar":67.4,"barLabel":"1 km","n":49,"raw":139},"zunderdorp":{"d":"M50.4 84.4 L52.9 82.9 L43.6 66.1 L33.6 53.2 L20.4 41 L39.2 11.8 L47.2 14.9 L49.3 10.8 L50.8 11.3 L51.3 10 L72.4 16.7 L83 18 L82.4 21.9 L76.3 27 L72.2 33.1 L89.9 54.7 L89.5 55.7 L90.5 56.5 L89.8 58.9 L83.2 68 L79.9 70.3 L81 71.3 L86.2 70.1 L88 70.6 L90.8 68.8 L93 69 L98.2 63.8 L102.7 62.6 L103.7 64 L103.7 79.4 L104.3 80.7 L108.2 80.1 L111.9 94.4 L114.9 93.8 L115.7 104.5 L114.1 106.7 L115.8 108.6 L130.8 101.5 L141 99 L143.3 100.2 L144.7 99.8 L146 96.7 L148.4 95.6 L153.1 110.9 L172.9 106.9 L177.8 120.8 L177.9 124.8 L179.6 130.8 L178.7 135.3 L179.3 143.2 L176.6 153.6 L178.3 167.1 L176.8 168.6 L163.5 175 L164.7 181.9 L163.7 175.5 L144.1 184.2 L135.4 189.5 L132.3 188 L128.7 190 L123.6 182.8 L122.1 183.4 L110.7 179 L106.8 175.8 L101.7 176 L84.3 187.5 L78.4 179.5 L82.6 176.3 L84.7 176.6 L87 175.5 L87.1 174.4 L86 165.2 L83.5 161.8 L82.4 153.7 L81.2 153.1 L79.3 136.2 L70 121.2 L61.7 102.6 L60.4 102.9 L58.7 101.4 L50.4 84.4","start":[50.4,84.4],"closed":true,"ll":[[52.39513,4.96746],[52.39538,4.96815],[52.39819,4.96561],[52.40035,4.96289],[52.4024,4.95929],[52.40729,4.96443],[52.40677,4.96661],[52.40745,4.96716],[52.40738,4.96759],[52.40759,4.96773],[52.40646,4.97347],[52.40625,4.97635],[52.40559,4.97618],[52.40475,4.97453],[52.40372,4.9734],[52.40011,4.97824],[52.39994,4.97814],[52.39981,4.97839],[52.39941,4.97822],[52.39787,4.9764],[52.39749,4.9755],[52.39732,4.97581],[52.39753,4.97723],[52.39744,4.97772],[52.39775,4.97847],[52.39771,4.97908],[52.39858,4.9805],[52.39878,4.98173],[52.39854,4.98201],[52.39597,4.98199],[52.39576,4.98217],[52.39586,4.98323],[52.39345,4.98423],[52.39355,4.98505],[52.39177,4.98528],[52.3914,4.98484],[52.39108,4.9853],[52.39227,4.98939],[52.39269,4.99217],[52.39248,4.9928],[52.39256,4.99318],[52.39308,4.99352],[52.39326,4.99419],[52.3907,4.99547],[52.39137,5.00086],[52.38903,5.0022],[52.38837,5.00221],[52.38737,5.00269],[52.38661,5.00243],[52.38529,5.0026],[52.38354,5.00187],[52.38129,5.00232],[52.38103,5.00191],[52.37996,4.99831],[52.37881,4.99862],[52.37987,4.99836],[52.37842,4.99302],[52.37754,4.99063],[52.37778,4.9898],[52.37745,4.98881],[52.37865,4.98742],[52.37856,4.987],[52.3793,4.98391],[52.37983,4.98285],[52.37979,4.98146],[52.37787,4.9767],[52.37921,4.97509],[52.37975,4.97626],[52.3797,4.97682],[52.37988,4.97746],[52.38006,4.97747],[52.3816,4.97717],[52.38217,4.9765],[52.38352,4.9762],[52.38363,4.97587],[52.38646,4.97536],[52.38897,4.97282],[52.39208,4.97055],[52.39204,4.97021],[52.39228,4.96973],[52.39513,4.96746]],"bbox":[52.37745,4.95929,52.40759,5.00269],"km":12.5,"bar":54.0,"barLabel":"1 km","n":81,"raw":321}};
 const ROUTES = [
-  { file: "awd.gpx", name: "Het Tientje van Waternet (Waterleidingduinen)" },
-  { file: "bos.gpx", name: "Amsterdamse Bos" },
-  { file: "broek.gpx", name: "Laarzenpad (Broek in Waterland)" },
-  { file: "heide.gpx", name: "Wester- en Bussumerheide" },
-  { file: "jonker.gpx", name: "Nieuwkoop" },
-  { file: "vinkeveen.gpx", name: "Vinkeveense Plassen & Baambrugge" },
-  { file: "amsterdam_circularwalk-13km-zunderdorp-ransdorp-durgerdam.gpx",
-    name: "Zunderdorp – Ransdorp – Durgerdam (13 km)" },
-  { file: "781-laarzenpad-naardermeer-jan-2017.gpx", name: "Laarzenpad Naardermeer" },
-  { file: "352-oppad-en-kromme-rade.gpx", name: "Oppad en Kromme Rade" },
-  { file: "map_0.gpx", name: "Konikroute (Zuid-Kennemerland)" },
+{id:"middelpolder",gpx:"paid",dl:[["gps-route.org track (11.7 km, free)","https://www.gps-route.org/hike/netherlands/northholland/amsterdam/circularwalk-12km-amstelveenmiddelpolder"]],name:"Trage Tocht Amstelveen Middelpolder",area:"Amstelveense Middelpolder",walk:12,bike:1.9,ride:7,bearing:6.1,lat:52.3213,lon:4.8660,terrain:["polder","water"],kids:false,
+ start:"Uilenstede tram stop, Bos en Vaartlaan 98, Amstelveen",
+ desc:"Out of the edge of Amstelveen along the old Kalfjeslaan toll road and into the Middelpolder: ancient grazing meadows, small bridges and stepping stones across boggy ground, then back on a shell-surfaced towpath beside the Amstel. About three-quarters unpaved — the sharpest city-to-peat-meadow contrast you will find within walking distance of the house.",
+ note:"The rope ferry runs roughly mid-June to mid-March. Sections close 15 March – 15 June. No dogs, not waymarked, and genuinely muddy in winter.",alert:false,
+ src:[["Wandelzoekpagina","https://www.wandelzoekpagina.nl/wandeling/trage-tocht-amstelveen-middelpolder/17957/"]]},
+
+{id:"bos",gpx:"free",dl:[["GPX","https://amstelveen.plaece.nl/route/download/1413/gpx"],["Startpunt PDF","https://www.amsterdamsebos.nl/publish/pages/430426/wandelnetwerk_startpunt_de_boswinkel.pdf"]],name:"Amsterdamse Bos — the long loop",area:"Amsterdamse Bos, Amstelveen",walk:10,bike:4.0,ride:15,bearing:324.8,lat:52.3260,lon:4.8431,terrain:["forest","water"],kids:true,
+ start:"De Boswinkel visitor centre, Bosbaanweg, Amstelveen",
+ desc:"The long circuit of the Bos, starting at the De Boswinkel visitor centre and threading past meadows, ponds and the old polder edges. The goat farm, the Bosbaan rowing course and enough cafés to turn it into half a day. Mostly good hard-surfaced paths.",
+ note:"The park publishes shorter waymarked loops too: Vijverwandeling 4 km, Hooglanderwandeling 4/6/9 km, Boerderijen en Vogeleiland 5 km, Heuvelwandeling 6 km, Oude Polderwandeling 7 km. Busy at weekends.",alert:false,
+ src:[["Visit Amstelveen — 10 km","https://www.visitamstelveen.nl/en/routes/859597616/amsterdamse-bos-10-km"],["Amsterdamse Bos — walking","https://www.amsterdamsebos.nl/sport-bewegen/wandelen/"]]},
+
+{id:"gein",gpx:"paid",dl:[],name:"Kort en Prachtig Abcoude — Gein",area:"Gein / Hollandse Kade",walk:7,bike:10.4,ride:39,bearing:113.1,lat:52.2796,lon:4.9717,terrain:["polder","water"],kids:true,
+ start:"Car park, sportpark De Hollandse Kade, Ruwelspad 1, Abcoude",
+ desc:"A compact classic along the Gein, the small river Mondriaan painted over and over around 1905. Along the Hollandse Kade through ditch-threaded Groene Hart grassland, past two windmills, the earthen batteries of the Stelling van Amsterdam and the Bijlmerlust country house.",
+ note:"Largely paved and therefore easy with children; cafés in the centre of Abcoude at the finish. Dogs on a lead. Not waymarked — bring the GPX.",alert:false,
+ src:[["Wandelzoekpagina","https://www.wandelzoekpagina.nl/wandeling/kort-en-prachtig-abcoude-gein/20784/"]]},
+
+{id:"fortenpad",gpx:"free",dl:[["GPX via gpswalking.nl","https://www.gpswalking.nl/wandeling/722/fortenpad"]],name:"Fortenpad Uithoorn",area:"Zijdelmeer / Stelling van Amsterdam",walk:8,bike:10.9,ride:41,bearing:201.0,lat:52.228876,lon:4.814394,terrain:["polder","water"],kids:true,
+ start:"Fort aan de Drecht, Grevelingen 50, Uithoorn",
+ desc:"Links two UNESCO-listed forts of the Stelling van Amsterdam over old polder embankments, grass dikes and fort earthworks, crossing a constructed water-treatment wetland and the Zijdelmeer before returning along the seventeenth-century towpath on the Amsteldijk-Zuid. Small-scale, varied, and among the closest to home.",
+ note:"Waymarked with yellow-red-yellow stripes, about two hours of walking. Roughly 40% unpaved. Cafés in Uithoorn and De Kwakel; the fort restaurants open in the evening.",alert:false,
+ src:[["Uithoorn municipality","https://www.uithoorn.nl/Home/Sport_en_recreatie/Wandel_en_fietsroutes/Fortenroute"],["Wandelweb","https://wandelweb.nl/losse-routes/fortenpad-blauw"]]},
+
+{id:"diemerbos",gpx:"none",dl:[["Nearby free track: Diemerbos–Bijlmerweide","https://www.gpswalking.nl/wandeling/852/diemerbos-bijlmerweide"]],name:"Diemerbos loop",area:"Gaasp en Diem, Diemen",walk:11,bike:12.1,ride:45,bearing:72.7,lat:52.3324,lon:4.99058,terrain:["forest","water"],kids:true,
+ start:"House of Bird café, Diemerbospad 1a, Diemen",
+ desc:"Two landscapes in one loop: intimate paths through the young, water-rich Diemerbos with its oak and lime avenues at either end, and in the middle wide shallow-water plains fringed with reed, restored in 2022–23. A 6 km version starts from the same point.",
+ note:"House of Bird café at the start (daily from 10:00) and the Banjerbossie play forest en route — one of the better routes with children. No dogs. The peaty ground stays very wet after rain.",alert:false,
+ src:[["Mooisteroutes","https://www.mooisteroutes.nl/routes/a7874128/diemerbos/"],["Staatsbosbeheer","https://www.staatsbosbeheer.nl/routes/gaasp-en-diem/wandelroute-diemerbos"]]},
+
+{id:"vinkeveen",gpx:"free",dl:[["GPX","https://api.ubase.nl/route/download/43574/gpx"],["Route page","https://www.routesinutrecht.nl/wandelroutes/3809398254/een-prachtige-wandeling-bij-de-vinkeveense-plassen"]],name:"Vinkeveense Plassen en Baambrugge",area:"De Ronde Venen",walk:9,bike:12.4,ride:46,bearing:132.8,lat:52.25053,lon:4.96458,terrain:["water","polder"],kids:true,
+ start:"Vinkenkade (TOP Winkelpolder), Vinkeveen — free parking",
+ desc:"Combines the distinctive <i>legakker</i> landscape of the Vinkeveense Plassen — long peat-drying strips between channels — with the picture-postcard Vecht village of Baambrugge. Along the way a windmill from 1635, eighteenth-century monuments, the ruins of Slot Abcoude, Fort aan de Winkel, and open polder dotted with farms.",
+ note:"Waymarked with numbered waypoints, though the markers are hard to spot in places. One stretch runs along the A2 noise barrier.",alert:false,
+ src:[["Wandelzoekpagina","https://www.wandelzoekpagina.nl/wandeling/vinkeveense-plassen-en-baambrugge/18370/"]]},
+
+{id:"zunderdorp",gpx:"free",dl:[["GPX \u2014 button on the route page","https://www.gps-route.org/hike/netherlands/northholland/amsterdam/circularwalk-13km-zunderdorp-ransdorp-durgerdam"]],name:"Zunderdorp — Ransdorp — Durgerdam",area:"Landelijk Noord",walk:12.8,bike:17.3,ride:65,bearing:32.4,lat:52.40722,lon:4.96611,terrain:["polder"],kids:true,
+ start:"TOP Buitengouw, Volendammerweg, Amsterdam-Noord",
+ desc:"The classic three-village circuit through Amsterdam’s own countryside: country lanes to Zunderdorp and the Nieuwe Sloot, then Ransdorp with its famous stump of a church tower, built without a spire, and on through the IJdoornpolder to Durgerdam — a single ribbon of leaning wooden dike houses along the Buiten-IJ. Wide skies, sheep and water throughout.",
+ note:"From 15 March to 15 June a bridge near the Durgerdam church is closed; there is a detour via the Kweeklust allotments. The ride out goes via the free ferry behind Amsterdam Centraal.",alert:false,
+ src:[["GPS-route.org","https://www.gps-route.org/hike/netherlands/northholland/amsterdam/circularwalk-13km-zunderdorp-ransdorp-durgerdam"]]},
+
+{id:"muiden",gpx:"paid",dl:[],name:"Langs Vecht en IJmeer",area:"Muiden / Muiderberg",walk:14,bike:18.2,ride:68,bearing:81.4,lat:52.32696,lon:5.06675,terrain:["water","forest"],kids:false,
+ start:"Fort H, Herengracht 119, Muiden",
+ desc:"Starts along the Vecht at Muiden, crosses the flat polder behind it and then climbs onto the sandy higher ground at Muiderberg, returning westward along the IJmeer sea dike with wide views over the water. The Muiderslot and the fortified town of Muiden bookend the walk.",
+ note:"The clay dike is slippery in winter and after rain, and the westerly wind on the IJmeerdijk is the real discomfort. Not waymarked. Dogs on a lead.",alert:false,
+ src:[["Wandelzoekpagina","https://www.wandelzoekpagina.nl/wandeling/langs-vecht-en-ijmeer/21058/"]]},
+
+{id:"jonker",gpx:"free",dl:[["GPX","https://wandelnet.api.routemaker.nl/content/gpx/wandelnet/1470.gpx"],["Route PDF","https://wandelnet.api.routemaker.nl/content/pdf/routes/wandelnet/1470.pdf"],["Map PDF","https://wandelnet.api.routemaker.nl/content/pdf/kaart/wandelnet/1470.pdf"]],name:"De Groene Jonker",area:"Nieuwkoopse Plassen",walk:12.9,bike:18.6,ride:70,bearing:188.1,lat:52.17905,lon:4.83404,terrain:["water"],kids:true,
+ start:"De Groene Jonker car park, Zevenhovenseweg, Noorden",
+ desc:"An emphatically bird-rich wetland walk on the edge of the Nieuwkoopse Plassen: long wooden boardwalks over shallow water and reed, open margins, and the young marshland of De Groene Jonker, which draws spoonbills, bearded reedlings and black terns. Alternates between reserve, waterside and farmland.",
+ note:"No dogs. Not waymarked — download the free GPX, PDF route and map from Wandelnet. There are observation screens; binoculars earn their weight.",alert:false,
+ src:[["Wandelnet","https://www.wandelnet.nl/wandelroute/1470/Nieuwkoop"],["Natuurmonumenten","https://www.natuurmonumenten.nl/natuurgebieden/nieuwkoopse-plassen"]]},
+
+{id:"loenen",gpx:"paid",dl:[],name:"Kort en Prachtig Loenen aan de Vecht",area:"Vechtstreek",walk:7,bike:20.1,ride:75,bearing:135.3,lat:52.2098,lon:5.0217,terrain:["water","forest"],kids:true,
+ start:"Car park, Rijksstraatweg 98, Loenen aan de Vecht",
+ desc:"Strings together the country estates just outside Loenen — Vegtlust and Vrederijk among them — with towpath stretches right along the river. Loenen itself is one of the prettiest villages on the Vecht, so the walk begins and ends among listed façades and terraces.",
+ note:"Part of the Vrederijk estate is closed from 1 April to 31 July, when a detour is needed. Dogs on a lead, and restricted on Vrederijk. Not waymarked.",alert:true,
+ src:[["Wandelzoekpagina","https://www.wandelzoekpagina.nl/wandeling/kort-en-prachtig-loenen-aan-de-vecht/20549/"]]},
+
+{id:"broek",gpx:"free",dl:[["GPX","https://odp.laagholland.com/route/download/1365/gpx?stream=1"]],name:"Laarzenpadroute Broek in Waterland",area:"Varkensland / Waterland",walk:11,bike:21.7,ride:81,bearing:32.8,lat:52.435415,lon:4.997208,terrain:["water","polder"],kids:false,
+ start:"Junction 11, Nieuwland, Broek in Waterland",
+ desc:"Starts in the painted wooden village of Broek in Waterland, follows the Broekervaart and then plunges into the Varkensland reserve. The <i>laarzenpad</i> is exactly what it promises: a squelching trail through peat-moss reed land with wild orchids and large numbers of meadow birds. Red posts mark the route, white ones the many little bridges.",
+ note:"Closed 15 March to 15 June for nesting meadow birds. No dogs. Wellingtons are not an exaggeration. The ride out goes via the free ferry behind Amsterdam Centraal.",alert:true,
+ src:[["Laag Holland","https://www.laagholland.com/nl/routes-overzicht/2421247559/laarzenpadroute"]]},
+
+{id:"oppad",gpx:"free",dl:[["GPX — button on the route page","https://www.natuurmonumenten.nl/natuurgebieden/kortenhoefse-plassen/route/wandelroute-oppad-en-kromme-rade-vlak-bij-hilversum"],["Route PDF","https://www.natuurmonumenten.nl/pdf/natuurgebieden/kortenhoefse-plassen/route/wandelroute-oppad-en-kromme-rade-vlak-bij-hilversum"],["GPX via gpswalking.nl","https://gpswalking.nl/wandeling/753/oppad-kromme-rade"]],name:"Oppad en Kromme Rade",area:"Kortenhoefse Plassen / Het Hol",walk:9,bike:23.6,ride:88,bearing:121.4,lat:52.225,lon:5.085,terrain:["water"],kids:false,
+ start:"Car park on the Vreelandseweg, Kortenhoef",
+ desc:"Two centuries-old church paths — the Oppad and the Kromme Rade — knotted into a circuit through the marsh between the Kortenhoefse Plassen, Het Hol and the Vuntus. You walk a narrow raised path with open water, reed and quaking bog on both sides. It is the only way to see Het Hol, which has no other public access.",
+ note:"Narrow, slippery paths right beside the water — supervision needed with small children. Nothing open for refreshment en route. Depending on the connecting leg, sources give 9 or 11 km. Dogs permitted.",alert:false,
+ src:[["Natuurmonumenten","https://www.natuurmonumenten.nl/natuurgebieden/kortenhoefse-plassen/route/wandelroute-oppad-en-kromme-rade-vlak-bij-hilversum"],["GPSwalking","https://gpswalking.nl/wandeling/753/oppad-kromme-rade"]]},
+
+{id:"naardermeer",gpx:"free",dl:[["GPX — button on the route page","https://www.natuurmonumenten.nl/natuurgebieden/naardermeer/route/wandelroute-laarzenpad-naardermeer"],["Route PDF","https://www.natuurmonumenten.nl/pdf/natuurgebieden/naardermeer/route/wandelroute-laarzenpad-naardermeer"]],name:"Laarzenpad Naardermeer",area:"Naardermeer",walk:6.1,bike:24.7,ride:93,bearing:95.4,lat:52.2918,lon:5.1421,terrain:["water","forest"],kids:true,
+ start:"Karnemelksloot entrance / Gasterij Stadzigt, Meerkade 2A, Naarden",
+ desc:"Short but genuinely wild: boardwalks through swamp forest and along flower-rich hay meadows at the edge of the oldest nature reserve in the Netherlands. Two observation points open onto the reed beds and open water; herons, marsh birds and grass snakes are regulars.",
+ note:"Boots genuinely required. No dogs. Natuurmonumenten lists a seasonal closure for dike maintenance (17 Aug – 24 Oct, weekdays 07:00–16:00) — check before going. The lake itself is only visible from the whisper-boat excursion.",alert:true,
+ src:[["Natuurmonumenten","https://www.natuurmonumenten.nl/natuurgebieden/naardermeer/route/wandelroute-laarzenpad-naardermeer"]]},
+
+{id:"tienbergen",gpx:"none",dl:[["Park walking &amp; cycling map (JPG)","https://www.np-zuidkennemerland.nl/wp-content/uploads/2026/04/Wandel-en-fietskaart-NPZK-april-2026.jpg"]],name:"Tien Bergenroute",area:"Nationaal Park Zuid-Kennemerland",walk:9,bike:25.3,ride:95,bearing:297.8,lat:52.39614,lon:4.59219,terrain:["dune"],kids:false,
+ start:"Koevlak entrance / De Kennemerduinen visitor centre, Zeeweg 12, Overveen",
+ desc:"The classic crossing of the Kennemerduinen: from the old inner-dune edge over the high seaward ridge, across a string of dune hills with names like Konijnenberg and Hazenberg, with wide views of sea and dune. En route the dune lakes ’t Wed and the Vogelmeer, where cormorants and waterbirds gather.",
+ note:"Blue arrows. The park is free on foot, open sunrise to sunset. No dogs. Free-roaming Konik horses and Highland cattle: keep 25 metres away. Free bike racks at the visitor centre.",alert:false,
+ src:[["NP Zuid-Kennemerland","https://www.np-zuidkennemerland.nl/route/tien-bergenroute-blauwe-route-parnassia/"]]},
+
+{id:"twiske",gpx:"paid",dl:[["gps-route.org track, same area (15.6 km, free)","https://www.gps-route.org/hike/netherlands/northholland/amsterdam/circularwalk-16km-hettwiske"]],name:"Trage Tocht Het Twiske",area:"Het Twiske / Den Ilp",walk:15,bike:25.5,ride:96,bearing:10.2,lat:52.45167,lon:4.90556,terrain:["water","polder"],kids:false,
+ start:"Polderweg car park, Den Ilp",
+ desc:"Around ninety per cent unpaved: reed beds, wet meadows, wooden boardwalks and dozens of small bridges through an old peat-digging landscape turned recreation area. Past the deep Stooterplas, herds of Highland cattle, and over the historic Luyendijkje.",
+ note:"In the breeding season, 15 March – 15 July, two sections are closed; the route description gives paved alternatives. Not waymarked. Playground and small beaches at Paviljoen Twiske if you want to cut it short. The ride out goes via the ferry.",alert:true,
+ src:[["Wandelzoekpagina","https://www.wandelzoekpagina.nl/wandeling/trage-tocht-het-twiske/17193/"]]},
+
+{id:"awd",gpx:"free",dl:[["GPX","https://awd-media.waternet.nl/globalassets/awd/beleef/wandelroutes/tientje-van-waternet/het-tientje-van-waternet.gpx"],["Route map (PNG)","https://awd-media.waternet.nl/globalassets/awd/beleef/wandelroutes/tientje-van-waternet/routekaart-tientje-van-waternet.png"]],name:"Het Tientje van Waternet",area:"Amsterdamse Waterleidingduinen",walk:10,bike:25.8,ride:97,bearing:282.8,lat:52.3457,lon:4.5932,terrain:["dune","forest"],kids:false,
+ start:"Oase entrance / De Oranjekom visitor centre, 1e Leijweg, Vogelenzang",
+ desc:"Waternet’s own ten kilometres, in which dense dune woodland, wide plains, water channels and viewpoints follow one another in quick succession. Past the Museumduin, high lookouts over the sea of dunes, the Eiland van Rolvers and the path along the Oosterduinrel. Fallow deer are close to guaranteed.",
+ note:"Admission: €1.50 day ticket or €10 annual card from age 18. No dogs and no bikes inside (free racks at the entrance). Partly narrow, unmarked <i>struinpaden</i> — the little bridge over the Zwarteveldkanaal can be under water. Rutting season September–November: keep your distance.",alert:false,
+ src:[["AWD / Waternet","https://awd.waternet.nl/beleef/wandelroutes/tientje-van-waternet/"],["All AWD routes","https://awd.waternet.nl/beleef/wandelroutes/"]]},
+
+{id:"konik",gpx:"free",dl:[["GPX — button on the route page","https://www.natuurmonumenten.nl/natuurgebieden/nationaal-park-zuid-kennemerland/route/wandelroute-konikroute-nationaal-park-zuid"],["Route PDF","https://www.natuurmonumenten.nl/pdf/natuurgebieden/nationaal-park-zuid-kennemerland/route/wandelroute-konikroute-nationaal-park-zuid"],["GPX via gps-route.org (7.4 km)","https://www.gps-route.org/hike/netherlands/northholland/kennemerland/circularwalk-7km-santpoort-noord-duinenkruidberg"]],name:"Konikroute Duin en Kruidberg",area:"Duin en Kruidberg estate",walk:7.5,bike:26.1,ride:98,bearing:310.1,lat:52.43057,lon:4.62684,terrain:["forest","dune"],kids:true,
+ start:"Duin en Kruidberg entrance, Duin- en Kruidbergerweg 74, Santpoort-Noord",
+ desc:"A varied two-hour-plus loop that mixes estate history with raw dune: across former country-estate grounds and through open woodland, then up into the dunes to the Lichtbakkeet viewpoint, past an anti-tank ditch from the Atlantic Wall. Named for the Konik horses grazing here alongside Highland cattle and Shetland ponies.",
+ note:"Black arrows, free on foot. No dogs. Brasserie Hoeve Duin en Kruidberg at start and finish. For something longer, ‘Dwars door Duin en Kruidberg’ leaves from the same entrance — 12 km through drifting sand to the beach.",alert:false,
+ src:[["NP Zuid-Kennemerland","https://www.np-zuidkennemerland.nl/route/konikroute-duin-en-kruidberg/"],["Natuurmonumenten","https://www.natuurmonumenten.nl/natuurgebieden/nationaal-park-zuid-kennemerland/route/wandelroute-konikroute-nationaal-park-zuid"]]},
+
+{id:"graveland",gpx:"paid",dl:[["gps-route.org track, same estates (13.9 km, free)","https://www.gps-route.org/hike/netherlands/northholland/gooiland/circularwalk-14km--s-graveland-ankeveen"]],name:"Trage Tocht 's-Graveland",area:"'s-Graveland country estates",walk:12,bike:26.6,ride:100,bearing:112.1,lat:52.2413,lon:5.1308,terrain:["forest"],kids:true,
+ start:"Hervormde kerk, Noordereinde 14, ’s-Graveland",
+ desc:"An estate walk linking four seventeenth-century country seats — Hilverbeek, Jagtlust, Gooilust and Boekesteyn — over beech avenues, small bridges and woodland paths behind the houses. Around 95% unpaved, with plenty of benches and formal garden set-pieces. Spectacular in May when the rhododendrons at Gooilust flower.",
+ note:"Dogs allowed on a lead. Not waymarked. A path in the Corversbos has been closed and the route rerouted; parking is easiest at restaurant Vlaar.",alert:false,
+ src:[["Wandelzoekpagina","https://www.wandelzoekpagina.nl/wandeling/trage-tocht-s-graveland/18536/"]]},
+
+{id:"heide",gpx:"free",dl:[["GPX","https://hilversum.plaece.nl/route/download/17378/gpx?stream=1"],["Route PDF (GNR)","https://gnr.nl/wp-content/uploads/2022/03/wandelroute_westerheide_GNR.pdf"]],name:"Wester- en Bussumerheide",area:"Goois Natuurreservaat",walk:7.9,bike:29.6,ride:111,bearing:105.5,lat:52.2521,lon:5.1903,terrain:["heath"],kids:true,
+ start:"Dagcamping Hilversum-Laren, Hilversumseweg (N525)",
+ desc:"A waymarked circuit over the largest unbroken heathland in het Gooi, with views kilometres wide and, in August and September, solid purple heather. The route crosses prehistoric ground — urn fields, burial mounds and old sunken tracks — and touches the Bussumerheide by the Zanderij Crailoo wildlife bridge. Highland cattle and the local sheep flock graze here.",
+ note:"The furthest on the list, but the only real heath. Dogs on a lead; there are cattle grids on the route. Entirely unsheltered: no shade in summer, no cover from the wind. At its best in late August and September.",alert:false,
+ src:[["Visit Gooi &amp; Vecht","https://www.visitgooivecht.nl/nl/zien-doen/routes-in-gooi-vecht/routes-v1/2847401296/wester-en-bussummerheide-wandelroute"],["Goois Natuurreservaat","https://gnr.nl/activiteit/wandelen/"]]}
 ];
 
-const COLORS = ["#e6194b","#3cb44b","#4363d8","#f58231","#911eb4",
-                "#008080","#9a6324","#800000","#808000","#000075","#f032e6"];
+const TERM = {polder:"Polder", water:"Water & reed", dune:"Dunes", forest:"Woods & estates", heath:"Heath"};
+const state = {terrain:new Set(), ride:null, kids:false, gpx:false};
 
-const map = L.map("map");
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-}).addTo(map);
-map.setView([52.35, 4.9], 10);
-
-function haversine(a, b) {
-  const R = 6371000, rad = Math.PI / 180;
-  const dLat = (b[0] - a[0]) * rad, dLon = (b[1] - a[1]) * rad;
-  const s = Math.sin(dLat / 2) ** 2 +
-            Math.cos(a[0] * rad) * Math.cos(b[0] * rad) * Math.sin(dLon / 2) ** 2;
-  return 2 * R * Math.asin(Math.sqrt(s));
-}
-
-function parseGpx(text) {
-  const doc = new DOMParser().parseFromString(text, "application/xml");
-  const segs = [];
-  // Prefer track segments; fall back to route points.
-  doc.querySelectorAll("trkseg").forEach(seg => {
-    const pts = [...seg.querySelectorAll("trkpt")]
-      .map(p => [+p.getAttribute("lat"), +p.getAttribute("lon")]);
-    if (pts.length > 1) segs.push(pts);
+/* ---- radial schematic ---- */
+(function radar(){
+  const svg = document.getElementById("radar");
+  const C = 170, R = 138, MAX = 31;
+  const NS = "http://www.w3.org/2000/svg";
+  const mk = (t, a) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); return e; };
+  [0,90,180,270].forEach(a=>{
+    const r = a*Math.PI/180;
+    svg.appendChild(mk("line",{x1:C,y1:C,x2:C+Math.sin(r)*R,y2:C-Math.cos(r)*R,class:"spoke"}));
   });
-  if (!segs.length) {
-    doc.querySelectorAll("rte").forEach(rte => {
-      const pts = [...rte.querySelectorAll("rtept")]
-        .map(p => [+p.getAttribute("lat"), +p.getAttribute("lon")]);
-      if (pts.length > 1) segs.push(pts);
-    });
-  }
-  return segs;
-}
-
-const listEl = document.getElementById("route-list");
-const entries = [];
-
-ROUTES.forEach((route, i) => {
-  const color = COLORS[i % COLORS.length];
-  const item = document.createElement("div");
-  item.className = "route";
-  item.innerHTML =
-    `<span class="swatch" style="background:${color}"></span>` +
-    `<span class="name">${route.name}</span>` +
-    `<span class="dist"></span>` +
-    `<a class="dl" href="${encodeURIComponent(route.file)}" download title="Download GPX">&#8681;</a>`;
-  listEl.appendChild(item);
-  const entry = { ...route, color, item, layer: null, bounds: null, visible: true };
-  entries.push(entry);
-
-  fetch(route.file)
-    .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
-    .then(text => {
-      const segs = parseGpx(text);
-      if (!segs.length) throw new Error("no points");
-      let dist = 0;
-      segs.forEach(pts => { for (let k = 1; k < pts.length; k++) dist += haversine(pts[k-1], pts[k]); });
-      item.querySelector(".dist").textContent = (dist / 1000).toFixed(1) + " km";
-      entry.layer = L.polyline(segs, { color, weight: 3.5, opacity: 0.85 })
-        .bindTooltip(route.name, { sticky: true })
-        .on("click", () => { autoFit = false; map.fitBounds(entry.bounds.pad(0.15)); })
-        .addTo(map);
-      entry.bounds = entry.layer.getBounds();
-      fitAll();
-    })
-    .catch(err => {
-      item.querySelector(".dist").textContent = "failed";
-      item.style.opacity = 0.5;
-      console.error(route.file, err);
-    });
-
-  item.querySelector(".swatch").addEventListener("click", e => {
-    e.stopPropagation();
-    setVisible(entry, !entry.visible);
+  [10,20,30].forEach(km=>{
+    svg.appendChild(mk("circle",{cx:C,cy:C,r:km/MAX*R,class:"ring"}));
+    const t = mk("text",{x:C+4,y:C-km/MAX*R-4,class:"ring-lbl"}); t.textContent = km+" km"; svg.appendChild(t);
   });
-  item.addEventListener("click", () => {
-    if (!entry.bounds) return;
-    if (!entry.visible) setVisible(entry, true);
-    autoFit = false;
-    map.fitBounds(entry.bounds.pad(0.15));
+  ROUTES.forEach(rt=>{
+    const rad = rt.bearing*Math.PI/180, d = rt.bike/MAX*R;
+    const x = C+Math.sin(rad)*d, y = C-Math.cos(rad)*d;
+    const g = mk("g",{class:"dot", tabindex:"0", role:"link", "aria-label":rt.name+", "+rt.bike+" km by bike"});
+    g.appendChild(mk("circle",{cx:x,cy:y,r:9,fill:"transparent"}));
+    g.appendChild(mk("circle",{cx:x,cy:y,r:4.8,class:"pin",fill:"var(--t-"+rt.terrain[0]+")","fill-opacity":".9"}));
+    const ttl = mk("title",{}); ttl.textContent = rt.name+" — "+rt.walk+" km walk, "+rt.bike+" km ride"; g.appendChild(ttl);
+    const jump = ()=>{ const el=document.getElementById("c-"+rt.id); if(!el) return;
+      el.scrollIntoView({behavior:"smooth",block:"center"}); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); };
+    g.addEventListener("click",jump);
+    g.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();jump();} });
+    svg.appendChild(g);
+  });
+  svg.appendChild(mk("circle",{cx:C,cy:C,r:4,class:"home"}));
+  const h = mk("text",{x:C+9,y:C+13,class:"home-lbl"}); h.textContent = "AMSTELVEEN"; svg.appendChild(h);
+})();
+
+/* ---- cards ---- */
+function card(rt){
+  const tags = rt.terrain.map(t=>`<span class="tag ${t}">${TERM[t]}</span>`).join("")
+    + (rt.kids?`<span class="tag kids">Works with kids</span>`:"");
+  const srcs = rt.src.map(s=>`<a class="src" href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join("");
+  const BADGE = {free:"GPX free", paid:"GPX \u20ac13.49/yr", none:"No GPX found"};
+  const dls = rt.dl.map(d=>`<a class="dl" href="${d[1]}" target="_blank" rel="noopener">${d[0]}</a>`).join("");
+  const osm = `https://www.openstreetmap.org/?mlat=${rt.lat}&mlon=${rt.lon}#map=14/${rt.lat}/${rt.lon}`;
+  const t = TRACKS[rt.id];
+  const track = !t ? "" : `<figure class="track">
+      <button class="open" data-open="${rt.id}" aria-label="Open ${rt.name} on a map">
+      <svg viewBox="0 0 200 200" role="img" aria-label="Shape of the ${rt.name} track, ${t.km} km">
+        <path class="line" d="${t.d}"></path>
+        <circle class="startpin" cx="${t.start[0]}" cy="${t.start[1]}" r="4.2"></circle>
+        <g class="n"><path d="M186 8 L190 20 L186 17 L182 20 Z"></path><text class="lbl" x="183.5" y="30">N</text></g>
+        <line class="bar" x1="10" y1="192" x2="${10 + t.bar}" y2="192"></line>
+        <line class="bar" x1="10" y1="188.5" x2="10" y2="195.5"></line>
+        <line class="bar" x1="${10 + t.bar}" y1="188.5" x2="${10 + t.bar}" y2="195.5"></line>
+        <text class="lbl" x="10" y="184">${t.barLabel}</text>
+      </svg>
+      </button>
+      <figcaption><span class="expand">Open map</span><span>${t.km} km</span></figcaption>
+    </figure>`;
+  return `<article class="card" id="c-${rt.id}" data-terrain="${rt.terrain.join(' ')}" data-ride="${rt.ride}" data-kids="${rt.kids?1:0}" data-gpx="${rt.gpx}">
+    <div class="rail">
+      <div><span class="stat-k">Walk</span><span class="stat-v">${String(rt.walk)}<span class="u">km</span></span><span class="stat-sub">loop</span></div>
+      <div class="ride"><span class="stat-k">Ride</span><span class="stat-v">${String(rt.bike)}<span class="u">km</span></span><span class="stat-sub">± ${rt.ride} min</span></div>
+    </div>
+    <div class="body">
+      <h2>${rt.name}</h2>
+      <p class="where">${rt.area.toUpperCase()} · START: ${rt.start}</p>
+      <div class="tags">${tags}</div>
+      <div class="split"><div class="col">
+        <p class="desc">${rt.desc}</p>
+        <p class="note${rt.alert?' alert':''}">${rt.note}</p>
+      </div>${track}</div>
+      <div class="foot">${srcs}
+        <button class="coord" data-c="${rt.lat}, ${rt.lon}" title="Copy the trailhead coordinates">${rt.lat.toFixed(4)}, ${rt.lon.toFixed(4)}</button>
+      </div>
+      <div class="files"><span class="files-k">Files</span><span class="badge ${rt.gpx}">${BADGE[rt.gpx]}</span>${dls}<a class="dl osm" href="${osm}" target="_blank" rel="noopener">Trailhead on OpenStreetMap</a></div>
+    </div>
+  </article>`;
+}
+document.getElementById("list").innerHTML = ROUTES.map(card).join("");
+
+/* ---- filtering ---- */
+function apply(){
+  let n = 0;
+  ROUTES.forEach(rt=>{
+    const el = document.getElementById("c-"+rt.id);
+    const okT = state.terrain.size===0 || rt.terrain.some(t=>state.terrain.has(t));
+    const okR = state.ride===null || rt.ride<=state.ride;
+    const okK = !state.kids || rt.kids;
+    const okG = !state.gpx || rt.gpx==="free";
+    const show = okT && okR && okK && okG;
+    el.style.display = show ? "" : "none";
+    if (show) n++;
+  });
+  const c = document.getElementById("count");
+  c.textContent = n===ROUTES.length ? ROUTES.length+" routes" : n+" of "+ROUTES.length+" routes";
+  let empty = document.getElementById("empty");
+  if (n===0 && !empty){ empty=document.createElement("p"); empty.id="empty"; empty.className="empty";
+    empty.textContent="No route matches that combination — switch a filter off."; document.getElementById("list").appendChild(empty); }
+  if (n>0 && empty) empty.remove();
+}
+document.querySelectorAll(".chip").forEach(btn=>{
+  btn.setAttribute("aria-pressed","false");
+  btn.addEventListener("click",()=>{
+    const on = btn.getAttribute("aria-pressed")==="true";
+    const f = btn.dataset.filter, v = btn.dataset.value;
+    if (f==="terrain"){ on ? state.terrain.delete(v) : state.terrain.add(v); }
+    if (f==="ride"){ state.ride = on ? null : Number(v); }
+    if (f==="kids"){ state.kids = !on; }
+    if (f==="gpx"){ state.gpx = !on; }
+    btn.setAttribute("aria-pressed", String(!on));
+    apply();
   });
 });
+apply();
 
-function setVisible(entry, on) {
-  if (!entry.layer) return;
-  entry.visible = on;
-  entry.item.classList.toggle("off", !on);
-  if (on) entry.layer.addTo(map); else entry.layer.remove();
+/* ---- slippy map over the baked track ---- */
+const TILE = 256;
+function proj(lat, lon, z){                       // lon/lat -> world pixels (Web Mercator)
+  const n = TILE * Math.pow(2, z);
+  const s = Math.max(-0.9999, Math.min(0.9999, Math.sin(lat * Math.PI / 180)));
+  return [(lon + 180) / 360 * n, (0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI)) * n];
 }
+const LB = {el:null, id:null, z:13, cx:0, cy:0, tilesOk:null, frame:0};
 
-function fitAll() {
-  map.invalidateSize();
-  let bounds = null;
-  entries.forEach(e => {
-    if (e.bounds && e.visible) bounds = bounds ? bounds.extend(e.bounds) : L.latLngBounds(e.bounds.getSouthWest(), e.bounds.getNorthEast());
+function fitZoom(bbox, W, H){
+  for (let z = 17; z >= 8; z--){
+    const a = proj(bbox[2], bbox[1], z), b = proj(bbox[0], bbox[3], z);
+    if (Math.abs(b[0]-a[0]) < W - 80 && Math.abs(b[1]-a[1]) < H - 80) return z;
+  }
+  return 11;
+}
+function drawMap(){
+  const t = TRACKS[LB.id]; if (!t) return;
+  const map = document.getElementById("lb-map");
+  const W = map.clientWidth, H = map.clientHeight;
+  const ox = LB.cx - W/2, oy = LB.cy - H/2;
+  const box = document.getElementById("lb-tiles");
+  const keep = new Map();
+  box.querySelectorAll("img").forEach(im => keep.set(im.dataset.k, im));
+  const want = new Set();
+  const max = Math.pow(2, LB.z);
+  for (let tx = Math.floor(ox/TILE); tx <= Math.floor((ox+W)/TILE); tx++){
+    for (let ty = Math.floor(oy/TILE); ty <= Math.floor((oy+H)/TILE); ty++){
+      if (ty < 0 || ty >= max) continue;
+      const wx = ((tx % max) + max) % max, k = LB.z+"/"+wx+"/"+ty;
+      want.add(k);
+      let im = keep.get(k);
+      if (!im){
+        im = new Image(); im.dataset.k = k; im.alt = ""; im.decoding = "async";
+        im.addEventListener("error", tileFailed, {once:true});
+        im.src = `https://tile.openstreetmap.org/${LB.z}/${wx}/${ty}.png`;
+        box.appendChild(im);
+      }
+      im.style.left = (tx*TILE - ox) + "px";
+      im.style.top  = (ty*TILE - oy) + "px";
+    }
+  }
+  keep.forEach((im, k) => { if (!want.has(k)) im.remove(); });
+
+  const pts = t.ll.map(c => proj(c[0], c[1], LB.z)).map(q => [ (q[0]-ox).toFixed(1), (q[1]-oy).toFixed(1) ]);
+  const d = "M" + pts.map(q => q[0]+" "+q[1]).join(" L");
+  document.getElementById("lb-ovl").innerHTML =
+    `<path class="halo" d="${d}"></path><path class="path" d="${d}"></path>` +
+    `<circle class="pin" cx="${pts[0][0]}" cy="${pts[0][1]}" r="6"></circle>`;
+}
+let tileErrors = 0;
+function tileFailed(){
+  if (LB.tilesOk === false) return;
+  if (++tileErrors < 3) return;
+  LB.tilesOk = false;
+  document.getElementById("lb-tiles").style.display = "none";
+  document.getElementById("lb-map").classList.add("notiles");
+  const n = document.getElementById("lb-note");
+  n.textContent = "Map tiles can\u2019t load on this hosted page \u2014 it is sandboxed from other servers. The track, scale and shape below are real; open the downloaded HTML file for the OpenStreetMap background.";
+  n.hidden = false;
+  const hint = document.querySelector(".pan-hint"); if (hint) hint.textContent = "";
+}
+function schedule(){ if (LB.frame) return; LB.frame = requestAnimationFrame(()=>{ LB.frame = 0; drawMap(); }); }
+
+function openMap(id){
+  const rt = ROUTES.find(r => r.id === id), t = TRACKS[id];
+  if (!rt || !t) return;
+  LB.id = id; LB.el = document.activeElement;
+  document.getElementById("lb-title").textContent = rt.name;
+  document.getElementById("lb-sub").textContent = `${t.km} km \u00b7 ${rt.area}`;
+  const osm = `https://www.openstreetmap.org/?mlat=${rt.lat}&mlon=${rt.lon}#map=14/${rt.lat}/${rt.lon}`;
+  document.getElementById("lb-foot").innerHTML =
+    rt.dl.map(d => `<a class="dl" href="${d[1]}" target="_blank" rel="noopener">${d[0]}</a>`).join("") +
+    `<a class="dl osm" href="${osm}" target="_blank" rel="noopener">Trailhead on OpenStreetMap</a>` +
+    `<span class="lb-sub pan-hint" style="margin-left:auto">${LB.tilesOk === false ? "" : "Drag to pan"}</span>`;
+  const lb = document.getElementById("lb");
+  lb.hidden = false;
+  const map = document.getElementById("lb-map");
+  LB.z = fitZoom(t.bbox, map.clientWidth, map.clientHeight);
+  const c = proj((t.bbox[0]+t.bbox[2])/2, (t.bbox[1]+t.bbox[3])/2, LB.z);
+  LB.cx = c[0]; LB.cy = c[1];
+  drawMap();
+  document.getElementById("lb-x").focus();
+}
+function closeMap(){
+  document.getElementById("lb").hidden = true;
+  document.getElementById("lb-tiles").innerHTML = "";
+  if (LB.el && LB.el.focus) LB.el.focus();
+}
+function zoomBy(dz){
+  const t = TRACKS[LB.id]; if (!t) return;
+  const nz = Math.max(9, Math.min(17, LB.z + dz));
+  if (nz === LB.z) return;
+  const f = Math.pow(2, nz - LB.z);
+  LB.cx *= f; LB.cy *= f; LB.z = nz;
+  document.getElementById("lb-tiles").innerHTML = "";
+  drawMap();
+}
+document.getElementById("list").addEventListener("click", e => {
+  const b = e.target.closest("[data-open]"); if (b) openMap(b.dataset.open);
+});
+document.getElementById("lb-x").addEventListener("click", closeMap);
+document.getElementById("lb").addEventListener("click", e => { if (e.target.id === "lb") closeMap(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !document.getElementById("lb").hidden) closeMap(); });
+document.getElementById("lb-in").addEventListener("click", () => zoomBy(1));
+document.getElementById("lb-out").addEventListener("click", () => zoomBy(-1));
+(function pan(){
+  const map = document.getElementById("lb-map");
+  let on = false, px = 0, py = 0;
+  map.addEventListener("pointerdown", e => {
+    if (e.target.closest(".lb-zoom")) return;
+    on = true; px = e.clientX; py = e.clientY; map.classList.add("drag");
+    map.setPointerCapture(e.pointerId);
   });
-  if (bounds) map.fitBounds(bounds.pad(0.05));
-}
+  map.addEventListener("pointermove", e => {
+    if (!on) return;
+    LB.cx -= e.clientX - px; LB.cy -= e.clientY - py; px = e.clientX; py = e.clientY;
+    schedule();
+  });
+  const end = e => { on = false; map.classList.remove("drag"); };
+  map.addEventListener("pointerup", end); map.addEventListener("pointercancel", end);
+})();
+window.addEventListener("resize", () => { if (!document.getElementById("lb").hidden) schedule(); });
 
-// Keep auto-fitting to the loaded routes until the user takes over — this also
-// covers loading in a not-yet-laid-out (zero-size) tab, where fitBounds at
-// fetch time would compute zoom 0.
-let autoFit = true;
-map.getContainer().addEventListener("pointerdown", () => { autoFit = false; });
-map.getContainer().addEventListener("wheel", () => { autoFit = false; });
-new ResizeObserver(() => { if (autoFit) fitAll(); }).observe(map.getContainer());
-
-document.getElementById("fit-all").addEventListener("click", fitAll);
-document.getElementById("show-all").addEventListener("click", () => entries.forEach(e => setVisible(e, true)));
-document.getElementById("hide-all").addEventListener("click", () => entries.forEach(e => setVisible(e, false)));
+/* ---- copy coordinates ---- */
+document.getElementById("list").addEventListener("click", e=>{
+  const b = e.target.closest(".coord"); if(!b) return;
+  const original = b.textContent;
+  navigator.clipboard.writeText(b.dataset.c).then(()=>{
+    b.textContent = "copied";
+    setTimeout(()=>{ b.textContent = original; }, 1400);
+  }).catch(()=>{ b.textContent = "copy failed"; setTimeout(()=>{ b.textContent = original; }, 1400); });
+});
 </script>
+
 </body>
 </html>
