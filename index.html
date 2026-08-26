@@ -73,6 +73,12 @@ h1 em{font-style:italic; font-weight:400; color:var(--accent)}
   font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:10.5px; letter-spacing:.06em;
   color:var(--ink-3); margin:8px 2px 0; display:flex; justify-content:space-between; gap:8px;
 }
+.radar-all{
+  width:100%; margin-top:10px; font:500 12px/1 "Karla",sans-serif; letter-spacing:.02em;
+  padding:9px 12px; cursor:pointer; border:1px solid var(--line-strong);
+  background:transparent; color:var(--ink-2); border-radius:2px;
+}
+.radar-all:hover{border-color:var(--accent); color:var(--accent)}
 .dot{cursor:pointer}
 .dot circle{transition:r .12s ease}
 .dot:hover circle.pin, .dot:focus circle.pin{r:7}
@@ -142,6 +148,13 @@ h1 em{font-style:italic; font-weight:400; color:var(--accent)}
   display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center;
   padding:11px 16px; border-top:1px solid var(--line);
 }
+.lb-foot button.leg{
+  display:inline-flex; align-items:center; gap:6px; cursor:pointer;
+  font:500 12px/1 "Karla",sans-serif; padding:5px 10px; border-radius:999px;
+  border:1px solid var(--line-strong); background:transparent; color:var(--ink-2);
+}
+.lb-foot button.leg:hover{border-color:var(--ink-3); color:var(--ink)}
+.leg-dot{width:9px; height:9px; border-radius:50%; display:inline-block; flex:none}
 
 /* ---------- controls ---------- */
 .controls{
@@ -295,6 +308,7 @@ h1 em{font-style:italic; font-weight:400; color:var(--accent)}
     <figure class="radar">
       <svg id="radar" viewBox="0 0 340 340" role="img" aria-label="Schematic map of the trailheads around Amstelveen"></svg>
       <figcaption class="radar-cap"><span>Rings: 10 / 20 / 30 km by bike</span><span>N ↑</span></figcaption>
+      <button class="radar-all" id="open-all">Every track on one map →</button>
     </figure>
   </header>
 
@@ -602,8 +616,12 @@ function fitZoom(bbox, W, H){
   }
   return 11;
 }
+const ALL = "__all__";
+function drawnIds(){
+  return LB.id === ALL ? ROUTES.filter(r => TRACKS[r.id]).map(r => r.id) : [LB.id];
+}
 function drawMap(){
-  const t = TRACKS[LB.id]; if (!t) return;
+  if (!LB.id || (LB.id !== ALL && !TRACKS[LB.id])) return;
   const map = document.getElementById("lb-map");
   const W = map.clientWidth, H = map.clientHeight;
   const ox = LB.cx - W/2, oy = LB.cy - H/2;
@@ -630,11 +648,18 @@ function drawMap(){
   }
   keep.forEach((im, k) => { if (!want.has(k)) im.remove(); });
 
-  const pts = t.ll.map(c => proj(c[0], c[1], LB.z)).map(q => [ (q[0]-ox).toFixed(1), (q[1]-oy).toFixed(1) ]);
-  const d = "M" + pts.map(q => q[0]+" "+q[1]).join(" L");
-  document.getElementById("lb-ovl").innerHTML =
-    `<path class="halo" d="${d}"></path><path class="path" d="${d}"></path>` +
-    `<circle class="pin" cx="${pts[0][0]}" cy="${pts[0][1]}" r="6"></circle>`;
+  const all = LB.id === ALL;
+  let ovl = "";
+  drawnIds().forEach(id => {
+    const t = TRACKS[id];
+    const pts = t.ll.map(c => proj(c[0], c[1], LB.z)).map(q => [ (q[0]-ox).toFixed(1), (q[1]-oy).toFixed(1) ]);
+    const d = "M" + pts.map(q => q[0]+" "+q[1]).join(" L");
+    const rt = ROUTES.find(r => r.id === id);
+    const tint = all ? ` style="stroke:var(--t-${rt.terrain[0]})"` : "";
+    ovl += `<path class="halo" d="${d}"></path><path class="path"${tint} d="${d}"></path>` +
+      `<circle class="pin" cx="${pts[0][0]}" cy="${pts[0][1]}" r="${all ? 4.5 : 6}"></circle>`;
+  });
+  document.getElementById("lb-ovl").innerHTML = ovl;
 }
 let tileErrors = 0;
 function tileFailed(){
@@ -670,13 +695,35 @@ function openMap(id){
   drawMap();
   document.getElementById("lb-x").focus();
 }
+function openAllMap(){
+  const ids = ROUTES.filter(r => TRACKS[r.id]).map(r => r.id);
+  LB.id = ALL; LB.el = document.activeElement;
+  document.getElementById("lb-title").textContent = "Every track on one map";
+  const km = ids.reduce((s, id) => s + TRACKS[id].km, 0);
+  document.getElementById("lb-sub").textContent = `${ids.length} walks · ${Math.round(km)} km of track · colored by landscape`;
+  document.getElementById("lb-foot").innerHTML =
+    ids.map(id => { const rt = ROUTES.find(r => r.id === id);
+      return `<button class="leg" data-open="${id}"><span class="leg-dot" style="background:var(--t-${rt.terrain[0]})"></span>${rt.name}</button>`; }).join("") +
+    `<span class="lb-sub pan-hint" style="margin-left:auto">${LB.tilesOk === false ? "" : "Drag to pan · a name opens that walk"}</span>`;
+  document.getElementById("lb").hidden = false;
+  const map = document.getElementById("lb-map");
+  let bb = null;
+  ids.forEach(id => { const b = TRACKS[id].bbox;
+    bb = bb ? [Math.min(bb[0],b[0]), Math.min(bb[1],b[1]), Math.max(bb[2],b[2]), Math.max(bb[3],b[3])] : b.slice(); });
+  LB.z = fitZoom(bb, map.clientWidth, map.clientHeight);
+  const c = proj((bb[0]+bb[2])/2, (bb[1]+bb[3])/2, LB.z);
+  LB.cx = c[0]; LB.cy = c[1];
+  document.getElementById("lb-tiles").innerHTML = "";
+  drawMap();
+  document.getElementById("lb-x").focus();
+}
 function closeMap(){
   document.getElementById("lb").hidden = true;
   document.getElementById("lb-tiles").innerHTML = "";
   if (LB.el && LB.el.focus) LB.el.focus();
 }
 function zoomBy(dz){
-  const t = TRACKS[LB.id]; if (!t) return;
+  if (!LB.id) return;
   const nz = Math.max(9, Math.min(17, LB.z + dz));
   if (nz === LB.z) return;
   const f = Math.pow(2, nz - LB.z);
@@ -686,6 +733,10 @@ function zoomBy(dz){
 }
 document.getElementById("list").addEventListener("click", e => {
   const b = e.target.closest("[data-open]"); if (b) openMap(b.dataset.open);
+});
+document.getElementById("open-all").addEventListener("click", openAllMap);
+document.getElementById("lb-foot").addEventListener("click", e => {
+  const b = e.target.closest("button[data-open]"); if (b) openMap(b.dataset.open);
 });
 document.getElementById("lb-x").addEventListener("click", closeMap);
 document.getElementById("lb").addEventListener("click", e => { if (e.target.id === "lb") closeMap(); });

@@ -10,7 +10,8 @@ that go with them, served via GitHub Pages.
 - `index.html` — the guide itself: nineteen walks ordered by riding distance
   from Amstelveen, with terrain/distance/kids filters, a radial overview map,
   and (for the ten walks with a freely available GPX) an embedded track shape
-  that opens into a pannable OpenStreetMap view.
+  that opens into a pannable OpenStreetMap view. The button under the radial
+  map opens all ten tracks together on one map, colored by landscape.
 - `map.html` — a simple Leaflet viewer that draws all downloaded GPX tracks
   on one map. Click a route in the sidebar to zoom to it, click its color
   swatch to toggle it, and use the ⇩ link to download the GPX file.
