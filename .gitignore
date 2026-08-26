@@ -1,0 +1,5 @@
+.DS_Store
+*.notgpx
+.claude/
+# wrong download: routen.be route 13489 is a walk in Belgium, not Zunderdorp
+zunderdorp.gpx

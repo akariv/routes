@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Walking Routes around Amsterdam</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+  :root {
+    --bg: #ffffff;
+    --panel: #f7f7f5;
+    --text: #1c1c1c;
+    --muted: #6b6b6b;
+    --border: #e2e2de;
+    --accent: #2f6f4f;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  header h1 { font-size: 18px; margin: 0; }
+  header .sub { color: var(--muted); font-size: 13px; }
+  #layout { flex: 1; display: flex; min-height: 0; }
+  #sidebar {
+    width: 300px;
+    overflow-y: auto;
+    border-right: 1px solid var(--border);
+    background: var(--panel);
+    padding: 8px;
+  }
+  #map { flex: 1; }
+  .route {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .route:hover { background: rgba(0,0,0,0.05); }
+  .route .swatch {
+    width: 14px; height: 14px;
+    border-radius: 4px;
+    flex: none;
+    border: 2px solid transparent;
+  }
+  .route.off .swatch { background: transparent !important; border-color: var(--muted); }
+  .route.off .name { color: var(--muted); }
+  .route .name { font-size: 14px; flex: 1; line-height: 1.25; }
+  .route .dist { font-size: 12px; color: var(--muted); flex: none; }
+  .route .dl {
+    flex: none;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 2px 4px;
+    border-radius: 4px;
+  }
+  .route .dl:hover { color: var(--accent); background: rgba(0,0,0,0.06); }
+  #controls {
+    display: flex;
+    gap: 8px;
+    padding: 4px 8px 10px;
+  }
+  #controls button {
+    font-size: 12px;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--text);
+  }
+  #controls button:hover { border-color: var(--accent); color: var(--accent); }
+  @media (max-width: 700px) {
+    #layout { flex-direction: column; }
+    #sidebar {
+      width: 100%;
+      max-height: 40%;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Walking Routes around Amsterdam</h1>
+  <span class="sub">GPX tracks &mdash; click a route to zoom, click the swatch to toggle</span>
+</header>
+<div id="layout">
+  <div id="sidebar">
+    <div id="controls">
+      <button id="fit-all">Fit all</button>
+      <button id="show-all">Show all</button>
+      <button id="hide-all">Hide all</button>
+    </div>
+    <div id="route-list"></div>
+  </div>
+  <div id="map"></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+const ROUTES = [
+  { file: "awd.gpx", name: "Het Tientje van Waternet (Waterleidingduinen)" },
+  { file: "bos.gpx", name: "Amsterdamse Bos" },
+  { file: "broek.gpx", name: "Laarzenpad (Broek in Waterland)" },
+  { file: "heide.gpx", name: "Wester- en Bussumerheide" },
+  { file: "jonker.gpx", name: "Nieuwkoop" },
+  { file: "vinkeveen.gpx", name: "Vinkeveense Plassen & Baambrugge" },
+  { file: "amsterdam_circularwalk-13km-zunderdorp-ransdorp-durgerdam.gpx",
+    name: "Zunderdorp – Ransdorp – Durgerdam (13 km)" },
+  { file: "781-laarzenpad-naardermeer-jan-2017.gpx", name: "Laarzenpad Naardermeer" },
+  { file: "352-oppad-en-kromme-rade.gpx", name: "Oppad en Kromme Rade" },
+  { file: "map_0.gpx", name: "Konikroute (Zuid-Kennemerland)" },
+];
+
+const COLORS = ["#e6194b","#3cb44b","#4363d8","#f58231","#911eb4",
+                "#008080","#9a6324","#800000","#808000","#000075","#f032e6"];
+
+const map = L.map("map");
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
+map.setView([52.35, 4.9], 10);
+
+function haversine(a, b) {
+  const R = 6371000, rad = Math.PI / 180;
+  const dLat = (b[0] - a[0]) * rad, dLon = (b[1] - a[1]) * rad;
+  const s = Math.sin(dLat / 2) ** 2 +
+            Math.cos(a[0] * rad) * Math.cos(b[0] * rad) * Math.sin(dLon / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(s));
+}
+
+function parseGpx(text) {
+  const doc = new DOMParser().parseFromString(text, "application/xml");
+  const segs = [];
+  // Prefer track segments; fall back to route points.
+  doc.querySelectorAll("trkseg").forEach(seg => {
+    const pts = [...seg.querySelectorAll("trkpt")]
+      .map(p => [+p.getAttribute("lat"), +p.getAttribute("lon")]);
+    if (pts.length > 1) segs.push(pts);
+  });
+  if (!segs.length) {
+    doc.querySelectorAll("rte").forEach(rte => {
+      const pts = [...rte.querySelectorAll("rtept")]
+        .map(p => [+p.getAttribute("lat"), +p.getAttribute("lon")]);
+      if (pts.length > 1) segs.push(pts);
+    });
+  }
+  return segs;
+}
+
+const listEl = document.getElementById("route-list");
+const entries = [];
+
+ROUTES.forEach((route, i) => {
+  const color = COLORS[i % COLORS.length];
+  const item = document.createElement("div");
+  item.className = "route";
+  item.innerHTML =
+    `<span class="swatch" style="background:${color}"></span>` +
+    `<span class="name">${route.name}</span>` +
+    `<span class="dist"></span>` +
+    `<a class="dl" href="${encodeURIComponent(route.file)}" download title="Download GPX">&#8681;</a>`;
+  listEl.appendChild(item);
+  const entry = { ...route, color, item, layer: null, bounds: null, visible: true };
+  entries.push(entry);
+
+  fetch(route.file)
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+    .then(text => {
+      const segs = parseGpx(text);
+      if (!segs.length) throw new Error("no points");
+      let dist = 0;
+      segs.forEach(pts => { for (let k = 1; k < pts.length; k++) dist += haversine(pts[k-1], pts[k]); });
+      item.querySelector(".dist").textContent = (dist / 1000).toFixed(1) + " km";
+      entry.layer = L.polyline(segs, { color, weight: 3.5, opacity: 0.85 })
+        .bindTooltip(route.name, { sticky: true })
+        .on("click", () => { autoFit = false; map.fitBounds(entry.bounds.pad(0.15)); })
+        .addTo(map);
+      entry.bounds = entry.layer.getBounds();
+      fitAll();
+    })
+    .catch(err => {
+      item.querySelector(".dist").textContent = "failed";
+      item.style.opacity = 0.5;
+      console.error(route.file, err);
+    });
+
+  item.querySelector(".swatch").addEventListener("click", e => {
+    e.stopPropagation();
+    setVisible(entry, !entry.visible);
+  });
+  item.addEventListener("click", () => {
+    if (!entry.bounds) return;
+    if (!entry.visible) setVisible(entry, true);
+    autoFit = false;
+    map.fitBounds(entry.bounds.pad(0.15));
+  });
+});
+
+function setVisible(entry, on) {
+  if (!entry.layer) return;
+  entry.visible = on;
+  entry.item.classList.toggle("off", !on);
+  if (on) entry.layer.addTo(map); else entry.layer.remove();
+}
+
+function fitAll() {
+  map.invalidateSize();
+  let bounds = null;
+  entries.forEach(e => {
+    if (e.bounds && e.visible) bounds = bounds ? bounds.extend(e.bounds) : L.latLngBounds(e.bounds.getSouthWest(), e.bounds.getNorthEast());
+  });
+  if (bounds) map.fitBounds(bounds.pad(0.05));
+}
+
+// Keep auto-fitting to the loaded routes until the user takes over — this also
+// covers loading in a not-yet-laid-out (zero-size) tab, where fitBounds at
+// fetch time would compute zoom 0.
+let autoFit = true;
+map.getContainer().addEventListener("pointerdown", () => { autoFit = false; });
+map.getContainer().addEventListener("wheel", () => { autoFit = false; });
+new ResizeObserver(() => { if (autoFit) fitAll(); }).observe(map.getContainer());
+
+document.getElementById("fit-all").addEventListener("click", fitAll);
+document.getElementById("show-all").addEventListener("click", () => entries.forEach(e => setVisible(e, true)));
+document.getElementById("hide-all").addEventListener("click", () => entries.forEach(e => setVisible(e, false)));
+</script>
+</body>
+</html>

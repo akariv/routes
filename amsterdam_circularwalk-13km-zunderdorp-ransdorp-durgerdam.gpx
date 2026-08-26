@@ -1,0 +1,2222 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx
+	xmlns="http://www.topografix.com/GPX/1/1"
+	creator="GPS-route.ORG"
+	version="1.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+
+	<metadata>
+		<name>Zunderdorp - Ransdorp - Durgerdam (13km)</name>
+		<copyright author="GPS-route.ORG">
+			<year>2020</year>
+		</copyright>
+		<link href="http://creativecommons.org/licenses/by-nc-sa/3.0/nl/deed.nl">
+			<text>Creative Commons licence Attribution-Noncommercial-Share Alike 3.0 Netherlands</text>
+		</link>
+		<link href="https://www.gps-route.org/hike/netherlands/northholland/amsterdam/circularwalk-13km-zunderdorp-ransdorp-durgerdam">
+			<text>Zunderdorp - Ransdorp - Durgerdam (13km)</text>
+		</link>
+		<time>2026-08-26T19:53:25Z</time>
+		<bounds maxlat="52.41002" maxlon="5.00269" minlat="52.37379" minlon="4.95929"></bounds>
+	</metadata>
+
+	<wpt lat="52.39513" lon="4.96746">
+		<ele>0</ele>
+		<name>00km000 CONTINUE path</name>
+		<cmt>CONTINUE path</cmt>
+		<sym>Trail Head</sym>
+	</wpt>
+
+	<wpt lat="52.3953" lon="4.96792">
+		<ele>0</ele>
+		<name>00km036</name>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.39538" lon="4.96815">
+		<ele>-1</ele>
+		<name>00km054 LEFT path</name>
+		<cmt>LEFT path Zwartegouw</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39668" lon="4.9671">
+		<ele>-1</ele>
+		<name>00km215</name>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.40253" lon="4.95941">
+		<ele>-1</ele>
+		<name>01km065</name>
+		<sym>Circle with X</sym>
+	</wpt>
+
+	<wpt lat="52.4028" lon="4.95964">
+		<ele>-0</ele>
+		<name>01km099 RIGHT road</name>
+		<cmt>RIGHT road Zunderdorpergouw</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.40597" lon="4.96298">
+		<ele>-2</ele>
+		<name>01km518 CONTINUE road</name>
+		<cmt>CONTINUE road Zunderdorpergouw</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.40655" lon="4.96367">
+		<ele>0</ele>
+		<name>01km598</name>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.40658" lon="4.96372">
+		<ele>0</ele>
+		<name>01km603 CONTINUE road</name>
+		<cmt>CONTINUE road Middenlaan Zunderdorp</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.40729" lon="4.96443">
+		<ele>-0</ele>
+		<name>01km695 RIGHT road</name>
+		<cmt>RIGHT road Kerklaan Zunderdorp</cmt>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.40677" lon="4.96661">
+		<ele>1</ele>
+		<name>01km854 LEFT road</name>
+		<cmt>LEFT road Achterlaan</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.40727" lon="4.96706">
+		<ele>1</ele>
+		<name>01km918 CONTINUE road</name>
+		<cmt>CONTINUE road Achterlaan</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.40738" lon="4.96759">
+		<ele>1</ele>
+		<name>01km969 LEFT path</name>
+		<cmt>LEFT path Bullebrug</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.40749" lon="4.96766">
+		<ele>-0</ele>
+		<name>01km982</name>
+		<cmt>+~Zwetsloot</cmt>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.40759" lon="4.96773">
+		<ele>-1</ele>
+		<name>01km995 RIGHT path</name>
+		<cmt>RIGHT path along Zwetsloot</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.40646" lon="4.97384">
+		<ele>-2</ele>
+		<name>02km430</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.40616" lon="4.97634">
+		<ele>-2</ele>
+		<name>02km612</name>
+		<cmt>+~Zwetsloot</cmt>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.40559" lon="4.97618">
+		<ele>-1</ele>
+		<name>02km678 RIGHT path</name>
+		<cmt>RIGHT path ! bicycle path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.40385" lon="4.97361">
+		<ele>-1</ele>
+		<name>02km946</name>
+		<cmt>cattle grid</cmt>
+		<sym>Circle with X</sym>
+	</wpt>
+
+	<wpt lat="52.40372" lon="4.9734">
+		<ele>-1</ele>
+		<name>02km966 LEFT road</name>
+		<cmt>LEFT road Nieuwe Gouw with ! bicycle path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.40011" lon="4.97824">
+		<ele>-1</ele>
+		<name>03km484 RIGHT path</name>
+		<cmt>RIGHT path ! bicycle path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39994" lon="4.97814">
+		<ele>-1</ele>
+		<name>03km504 LEFT path</name>
+		<cmt>LEFT path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39981" lon="4.97839">
+		<ele>-1</ele>
+		<name>03km527 RIGHT track</name>
+		<cmt>RIGHT track</cmt>
+		<sym>Circle with X</sym>
+	</wpt>
+
+	<wpt lat="52.39782" lon="4.9763">
+		<ele>-1</ele>
+		<name>03km797</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.39736" lon="4.97567">
+		<ele>-0</ele>
+		<name>03km886 LEFT path</name>
+		<cmt>LEFT path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39753" lon="4.97723">
+		<ele>-0</ele>
+		<name>03km996</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.39768" lon="4.97829">
+		<ele>0</ele>
+		<name>04km080</name>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.39779" lon="4.9793">
+		<ele>-0</ele>
+		<name>04km155</name>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.39851" lon="4.98038">
+		<ele>-1</ele>
+		<name>04km269</name>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.39858" lon="4.9805">
+		<ele>-1</ele>
+		<name>04km280 RIGHT path</name>
+		<cmt>RIGHT path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39863" lon="4.98139">
+		<ele>-1</ele>
+		<name>04km340</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.39865" lon="4.98153">
+		<ele>-1</ele>
+		<name>04km350</name>
+		<cmt>stile</cmt>
+		<sym>Circle with X</sym>
+	</wpt>
+
+	<wpt lat="52.39879" lon="4.98162">
+		<ele>-0</ele>
+		<name>04km368 RIGHT road</name>
+		<cmt>RIGHT road Nieuwe Gouw with ! bicycle path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39865" lon="4.98191">
+		<ele>0</ele>
+		<name>04km394</name>
+		<cmt>+~Nieuwe Gouwsloot</cmt>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.39854" lon="4.98201">
+		<ele>-0</ele>
+		<name>04km408 RIGHT path</name>
+		<cmt>RIGHT path ! bicycle path Poppendammergouw</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39355" lon="4.98505">
+		<ele>-1</ele>
+		<name>05km132 RIGHT path</name>
+		<cmt>RIGHT path ! bicycle path Molenslootpad</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39324" lon="4.98509">
+		<ele>-1</ele>
+		<name>05km167</name>
+		<cmt>cattle grid</cmt>
+		<sym>Circle with X</sym>
+	</wpt>
+
+	<wpt lat="52.3914" lon="4.98484">
+		<ele>-0</ele>
+		<name>05km382 LEFT path</name>
+		<cmt>LEFT path ! bicycle path Weerslootpad</cmt>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.39123" lon="4.98508">
+		<ele>-0</ele>
+		<name>05km407</name>
+		<cmt>+~Weersloot</cmt>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.39257" lon="4.99257">
+		<ele>-1</ele>
+		<name>05km963</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.39251" lon="4.99295">
+		<ele>1</ele>
+		<name>05km992</name>
+		<cmt>+~Weersloot</cmt>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.39256" lon="4.99318">
+		<ele>1</ele>
+		<name>06km008 LEFT road</name>
+		<cmt>LEFT road Ransdorp</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39287" lon="4.99329">
+		<ele>1</ele>
+		<name>06km045 LEFT road</name>
+		<cmt>LEFT road Ransdorp</cmt>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.39326" lon="4.99419">
+		<ele>2</ele>
+		<name>06km123 RIGHT road</name>
+		<cmt>RIGHT road Dorpsweg, Ransdorp</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39072" lon="4.99541">
+		<ele>0</ele>
+		<name>06km418 LEFT road</name>
+		<cmt>LEFT road Durgerdammergouw with ! bicycle path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39038" lon="5.00139">
+		<ele>-2</ele>
+		<name>06km918</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.38749" lon="5.00267">
+		<ele>-1</ele>
+		<name>07km255 CONTINUE road</name>
+		<cmt>CONTINUE road Durgerdammergouw with ! bicycle path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.38148" lon="5.0022">
+		<ele>-0</ele>
+		<name>07km934</name>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.38129" lon="5.00232">
+		<ele>1</ele>
+		<name>07km957 RIGHT road</name>
+		<cmt>RIGHT road Durgerdammerdijk</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.37996" lon="4.99831">
+		<ele>2</ele>
+		<name>08km269 LEFT path</name>
+		<cmt>LEFT path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.37987" lon="4.99836">
+		<ele>1</ele>
+		<name>08km279 CONTINUE path</name>
+		<cmt>CONTINUE path Polder IJdoorn</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.37978" lon="4.99841">
+		<ele>1</ele>
+		<name>08km290</name>
+		<sym>Circle with X</sym>
+	</wpt>
+
+	<wpt lat="52.37881" lon="4.99862">
+		<ele>0</ele>
+		<name>08km401 TURN AROUND path</name>
+		<cmt>TURN AROUND path Polder IJdoorn</cmt>
+		<sym>Scenic Area</sym>
+	</wpt>
+
+	<wpt lat="52.37978" lon="4.99841">
+		<ele>1</ele>
+		<name>08km512</name>
+		<sym>Circle with X</sym>
+	</wpt>
+
+	<wpt lat="52.37987" lon="4.99836">
+		<ele>1</ele>
+		<name>08km522 LEFT path</name>
+		<cmt>LEFT path Jachthaven Durgerdam</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.37969" lon="4.99767">
+		<ele>1</ele>
+		<name>08km573</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.37957" lon="4.99721">
+		<ele>1</ele>
+		<name>08km607</name>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.37934" lon="4.99635">
+		<ele>1</ele>
+		<name>08km671</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.3789" lon="4.99471">
+		<ele>1</ele>
+		<name>08km792</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.37863" lon="4.99372">
+		<ele>1</ele>
+		<name>08km866</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.37842" lon="4.99302">
+		<ele>1</ele>
+		<name>08km919</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.37827" lon="4.99253">
+		<ele>2</ele>
+		<name>08km956</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.37794" lon="4.99161">
+		<ele>2</ele>
+		<name>09km029</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.3777" lon="4.99089">
+		<ele>4</ele>
+		<name>09km089 LEFT road</name>
+		<cmt>LEFT road Durgerdammerdijk</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.37745" lon="4.98881">
+		<ele>3</ele>
+		<name>09km255 RIGHT road</name>
+		<cmt>RIGHT road Durgerdammerdijk</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.37795" lon="4.98827">
+		<ele>2</ele>
+		<name>09km321</name>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.37815" lon="4.98798">
+		<ele>0</ele>
+		<name>09km351</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.37841" lon="4.98783">
+		<ele>1</ele>
+		<name>09km384</name>
+		<sym>Circle with X</sym>
+	</wpt>
+
+	<wpt lat="52.37865" lon="4.98742">
+		<ele>-1</ele>
+		<name>09km422 LEFT path</name>
+		<cmt>LEFT path narrow</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.37983" lon="4.98285">
+		<ele>-1</ele>
+		<name>09km774 LEFT path</name>
+		<cmt>LEFT path Het Blauwe Hoofd</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.37981" lon="4.98272">
+		<ele>-1</ele>
+		<name>09km783</name>
+		<cmt>+~Ringsloot</cmt>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.3797" lon="4.98201">
+		<ele>-1</ele>
+		<name>09km832 RIGHT track</name>
+		<cmt>RIGHT track</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.37856" lon="4.97835">
+		<ele>-1</ele>
+		<name>10km126 CONTINUE track</name>
+		<cmt>CONTINUE track</cmt>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.37836" lon="4.97796">
+		<ele>-1</ele>
+		<name>10km160 CONTINUE path</name>
+		<cmt>CONTINUE path boardwalk</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.37787" lon="4.9767">
+		<ele>-1</ele>
+		<name>10km261 RIGHT road</name>
+		<cmt>RIGHT road Durgerdammerdijk with ! bicycle path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.37921" lon="4.97509">
+		<ele>-0</ele>
+		<name>10km446 RIGHT path</name>
+		<cmt>RIGHT path ! bicycle path</cmt>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.37971" lon="4.9769">
+		<ele>-2</ele>
+		<name>10km591</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.37988" lon="4.97746">
+		<ele>-0</ele>
+		<name>10km633 LEFT path</name>
+		<cmt>LEFT path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.38057" lon="4.97742">
+		<ele>-0</ele>
+		<name>10km710 LEFT path</name>
+		<cmt>LEFT path ! bicycle path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.38171" lon="4.97699">
+		<ele>-1</ele>
+		<name>10km844 RIGHT path</name>
+		<cmt>RIGHT path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.38354" lon="4.9759">
+		<ele>0</ele>
+		<name>11km077 RIGHT path</name>
+		<cmt>RIGHT path ! bicycle path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.38363" lon="4.97587">
+		<ele>0</ele>
+		<name>11km087 LEFT path</name>
+		<cmt>LEFT path Zwartegouw</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.38384" lon="4.97591">
+		<ele>0</ele>
+		<name>11km110</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.38704" lon="4.97467">
+		<ele>-1</ele>
+		<name>11km486</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.38799" lon="4.97374">
+		<ele>1</ele>
+		<name>11km618</name>
+		<sym>Picnic Area</sym>
+	</wpt>
+
+	<wpt lat="52.38814" lon="4.9736">
+		<ele>1</ele>
+		<name>11km638</name>
+		<cmt>+~Weersloot</cmt>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.3883" lon="4.9735">
+		<ele>-0</ele>
+		<name>11km657 CONTINUE path</name>
+		<cmt>CONTINUE path Zwartegouw</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39208" lon="4.97055">
+		<ele>-1</ele>
+		<name>12km123 LEFT path</name>
+		<cmt>LEFT path</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39206" lon="4.97045">
+		<ele>-1</ele>
+		<name>12km130</name>
+		<sym>Bridge</sym>
+	</wpt>
+
+	<wpt lat="52.39203" lon="4.97033">
+		<ele>0</ele>
+		<name>12km139 RIGHT path</name>
+		<cmt>RIGHT path Buitengouw</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39228" lon="4.96973">
+		<ele>1</ele>
+		<name>12km189 RIGHT path</name>
+		<cmt>RIGHT path Buitengouw</cmt>
+		<sym>Waypoint</sym>
+	</wpt>
+
+	<wpt lat="52.39513" lon="4.96746">
+		<ele>0</ele>
+		<name>12km545 ARRIVAL</name>
+		<cmt>ARRIVAL</cmt>
+		<sym>Flag, Red</sym>
+	</wpt>
+
+	<rte>
+		<name>NLNH0260 (13km)</name>
+
+		<rtept lat="52.39513" lon="4.96746">
+			<ele>0</ele>
+			<name>00km000 CONTINUE path</name>
+			<cmt>CONTINUE path</cmt>
+			<sym>Trail Head</sym>
+		</rtept>
+
+		<rtept lat="52.3953" lon="4.96792">
+			<ele>0</ele>
+			<name>00km036</name>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.39538" lon="4.96815">
+			<ele>-1</ele>
+			<name>00km054 LEFT path</name>
+			<cmt>LEFT path Zwartegouw</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39668" lon="4.9671">
+			<ele>-1</ele>
+			<name>00km215</name>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.40253" lon="4.95941">
+			<ele>-1</ele>
+			<name>01km065</name>
+			<sym>Circle with X</sym>
+		</rtept>
+
+		<rtept lat="52.4028" lon="4.95964">
+			<ele>-0</ele>
+			<name>01km099 RIGHT road</name>
+			<cmt>RIGHT road Zunderdorpergouw</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.40597" lon="4.96298">
+			<ele>-2</ele>
+			<name>01km518 CONTINUE road</name>
+			<cmt>CONTINUE road Zunderdorpergouw</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.40655" lon="4.96367">
+			<ele>0</ele>
+			<name>01km598</name>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.40658" lon="4.96372">
+			<ele>0</ele>
+			<name>01km603 CONTINUE road</name>
+			<cmt>CONTINUE road Middenlaan Zunderdorp</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.40729" lon="4.96443">
+			<ele>-0</ele>
+			<name>01km695 RIGHT road</name>
+			<cmt>RIGHT road Kerklaan Zunderdorp</cmt>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.40677" lon="4.96661">
+			<ele>1</ele>
+			<name>01km854 LEFT road</name>
+			<cmt>LEFT road Achterlaan</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.40727" lon="4.96706">
+			<ele>1</ele>
+			<name>01km918 CONTINUE road</name>
+			<cmt>CONTINUE road Achterlaan</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.40738" lon="4.96759">
+			<ele>1</ele>
+			<name>01km969 LEFT path</name>
+			<cmt>LEFT path Bullebrug</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.40749" lon="4.96766">
+			<ele>-0</ele>
+			<name>01km982</name>
+			<cmt>+~Zwetsloot</cmt>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.40759" lon="4.96773">
+			<ele>-1</ele>
+			<name>01km995 RIGHT path</name>
+			<cmt>RIGHT path along Zwetsloot</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.40646" lon="4.97384">
+			<ele>-2</ele>
+			<name>02km430</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.40616" lon="4.97634">
+			<ele>-2</ele>
+			<name>02km612</name>
+			<cmt>+~Zwetsloot</cmt>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.40559" lon="4.97618">
+			<ele>-1</ele>
+			<name>02km678 RIGHT path</name>
+			<cmt>RIGHT path ! bicycle path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.40385" lon="4.97361">
+			<ele>-1</ele>
+			<name>02km946</name>
+			<cmt>cattle grid</cmt>
+			<sym>Circle with X</sym>
+		</rtept>
+
+		<rtept lat="52.40372" lon="4.9734">
+			<ele>-1</ele>
+			<name>02km966 LEFT road</name>
+			<cmt>LEFT road Nieuwe Gouw with ! bicycle path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.40011" lon="4.97824">
+			<ele>-1</ele>
+			<name>03km484 RIGHT path</name>
+			<cmt>RIGHT path ! bicycle path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39994" lon="4.97814">
+			<ele>-1</ele>
+			<name>03km504 LEFT path</name>
+			<cmt>LEFT path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39981" lon="4.97839">
+			<ele>-1</ele>
+			<name>03km527 RIGHT track</name>
+			<cmt>RIGHT track</cmt>
+			<sym>Circle with X</sym>
+		</rtept>
+
+		<rtept lat="52.39782" lon="4.9763">
+			<ele>-1</ele>
+			<name>03km797</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.39736" lon="4.97567">
+			<ele>-0</ele>
+			<name>03km886 LEFT path</name>
+			<cmt>LEFT path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39753" lon="4.97723">
+			<ele>-0</ele>
+			<name>03km996</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.39768" lon="4.97829">
+			<ele>0</ele>
+			<name>04km080</name>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.39779" lon="4.9793">
+			<ele>-0</ele>
+			<name>04km155</name>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.39851" lon="4.98038">
+			<ele>-1</ele>
+			<name>04km269</name>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.39858" lon="4.9805">
+			<ele>-1</ele>
+			<name>04km280 RIGHT path</name>
+			<cmt>RIGHT path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39863" lon="4.98139">
+			<ele>-1</ele>
+			<name>04km340</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.39865" lon="4.98153">
+			<ele>-1</ele>
+			<name>04km350</name>
+			<cmt>stile</cmt>
+			<sym>Circle with X</sym>
+		</rtept>
+
+		<rtept lat="52.39879" lon="4.98162">
+			<ele>-0</ele>
+			<name>04km368 RIGHT road</name>
+			<cmt>RIGHT road Nieuwe Gouw with ! bicycle path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39865" lon="4.98191">
+			<ele>0</ele>
+			<name>04km394</name>
+			<cmt>+~Nieuwe Gouwsloot</cmt>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.39854" lon="4.98201">
+			<ele>-0</ele>
+			<name>04km408 RIGHT path</name>
+			<cmt>RIGHT path ! bicycle path Poppendammergouw</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39355" lon="4.98505">
+			<ele>-1</ele>
+			<name>05km132 RIGHT path</name>
+			<cmt>RIGHT path ! bicycle path Molenslootpad</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39324" lon="4.98509">
+			<ele>-1</ele>
+			<name>05km167</name>
+			<cmt>cattle grid</cmt>
+			<sym>Circle with X</sym>
+		</rtept>
+
+		<rtept lat="52.3914" lon="4.98484">
+			<ele>-0</ele>
+			<name>05km382 LEFT path</name>
+			<cmt>LEFT path ! bicycle path Weerslootpad</cmt>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.39123" lon="4.98508">
+			<ele>-0</ele>
+			<name>05km407</name>
+			<cmt>+~Weersloot</cmt>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.39257" lon="4.99257">
+			<ele>-1</ele>
+			<name>05km963</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.39251" lon="4.99295">
+			<ele>1</ele>
+			<name>05km992</name>
+			<cmt>+~Weersloot</cmt>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.39256" lon="4.99318">
+			<ele>1</ele>
+			<name>06km008 LEFT road</name>
+			<cmt>LEFT road Ransdorp</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39287" lon="4.99329">
+			<ele>1</ele>
+			<name>06km045 LEFT road</name>
+			<cmt>LEFT road Ransdorp</cmt>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.39326" lon="4.99419">
+			<ele>2</ele>
+			<name>06km123 RIGHT road</name>
+			<cmt>RIGHT road Dorpsweg, Ransdorp</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39072" lon="4.99541">
+			<ele>0</ele>
+			<name>06km418 LEFT road</name>
+			<cmt>LEFT road Durgerdammergouw with ! bicycle path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39038" lon="5.00139">
+			<ele>-2</ele>
+			<name>06km918</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.38749" lon="5.00267">
+			<ele>-1</ele>
+			<name>07km255 CONTINUE road</name>
+			<cmt>CONTINUE road Durgerdammergouw with ! bicycle path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.38148" lon="5.0022">
+			<ele>-0</ele>
+			<name>07km934</name>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.38129" lon="5.00232">
+			<ele>1</ele>
+			<name>07km957 RIGHT road</name>
+			<cmt>RIGHT road Durgerdammerdijk</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.37996" lon="4.99831">
+			<ele>2</ele>
+			<name>08km269 LEFT path</name>
+			<cmt>LEFT path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.37987" lon="4.99836">
+			<ele>1</ele>
+			<name>08km279 CONTINUE path</name>
+			<cmt>CONTINUE path Polder IJdoorn</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.37978" lon="4.99841">
+			<ele>1</ele>
+			<name>08km290</name>
+			<sym>Circle with X</sym>
+		</rtept>
+
+		<rtept lat="52.37881" lon="4.99862">
+			<ele>0</ele>
+			<name>08km401 TURN AROUND path</name>
+			<cmt>TURN AROUND path Polder IJdoorn</cmt>
+			<sym>Scenic Area</sym>
+		</rtept>
+
+		<rtept lat="52.37978" lon="4.99841">
+			<ele>1</ele>
+			<name>08km512</name>
+			<sym>Circle with X</sym>
+		</rtept>
+
+		<rtept lat="52.37987" lon="4.99836">
+			<ele>1</ele>
+			<name>08km522 LEFT path</name>
+			<cmt>LEFT path Jachthaven Durgerdam</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.37969" lon="4.99767">
+			<ele>1</ele>
+			<name>08km573</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.37957" lon="4.99721">
+			<ele>1</ele>
+			<name>08km607</name>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.37934" lon="4.99635">
+			<ele>1</ele>
+			<name>08km671</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.3789" lon="4.99471">
+			<ele>1</ele>
+			<name>08km792</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.37863" lon="4.99372">
+			<ele>1</ele>
+			<name>08km866</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.37842" lon="4.99302">
+			<ele>1</ele>
+			<name>08km919</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.37827" lon="4.99253">
+			<ele>2</ele>
+			<name>08km956</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.37794" lon="4.99161">
+			<ele>2</ele>
+			<name>09km029</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.3777" lon="4.99089">
+			<ele>4</ele>
+			<name>09km089 LEFT road</name>
+			<cmt>LEFT road Durgerdammerdijk</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.37745" lon="4.98881">
+			<ele>3</ele>
+			<name>09km255 RIGHT road</name>
+			<cmt>RIGHT road Durgerdammerdijk</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.37795" lon="4.98827">
+			<ele>2</ele>
+			<name>09km321</name>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.37815" lon="4.98798">
+			<ele>0</ele>
+			<name>09km351</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.37841" lon="4.98783">
+			<ele>1</ele>
+			<name>09km384</name>
+			<sym>Circle with X</sym>
+		</rtept>
+
+		<rtept lat="52.37865" lon="4.98742">
+			<ele>-1</ele>
+			<name>09km422 LEFT path</name>
+			<cmt>LEFT path narrow</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.37983" lon="4.98285">
+			<ele>-1</ele>
+			<name>09km774 LEFT path</name>
+			<cmt>LEFT path Het Blauwe Hoofd</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.37981" lon="4.98272">
+			<ele>-1</ele>
+			<name>09km783</name>
+			<cmt>+~Ringsloot</cmt>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.3797" lon="4.98201">
+			<ele>-1</ele>
+			<name>09km832 RIGHT track</name>
+			<cmt>RIGHT track</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.37856" lon="4.97835">
+			<ele>-1</ele>
+			<name>10km126 CONTINUE track</name>
+			<cmt>CONTINUE track</cmt>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.37836" lon="4.97796">
+			<ele>-1</ele>
+			<name>10km160 CONTINUE path</name>
+			<cmt>CONTINUE path boardwalk</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.37787" lon="4.9767">
+			<ele>-1</ele>
+			<name>10km261 RIGHT road</name>
+			<cmt>RIGHT road Durgerdammerdijk with ! bicycle path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.37921" lon="4.97509">
+			<ele>-0</ele>
+			<name>10km446 RIGHT path</name>
+			<cmt>RIGHT path ! bicycle path</cmt>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.37971" lon="4.9769">
+			<ele>-2</ele>
+			<name>10km591</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.37988" lon="4.97746">
+			<ele>-0</ele>
+			<name>10km633 LEFT path</name>
+			<cmt>LEFT path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.38057" lon="4.97742">
+			<ele>-0</ele>
+			<name>10km710 LEFT path</name>
+			<cmt>LEFT path ! bicycle path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.38171" lon="4.97699">
+			<ele>-1</ele>
+			<name>10km844 RIGHT path</name>
+			<cmt>RIGHT path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.38354" lon="4.9759">
+			<ele>0</ele>
+			<name>11km077 RIGHT path</name>
+			<cmt>RIGHT path ! bicycle path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.38363" lon="4.97587">
+			<ele>0</ele>
+			<name>11km087 LEFT path</name>
+			<cmt>LEFT path Zwartegouw</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.38384" lon="4.97591">
+			<ele>0</ele>
+			<name>11km110</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.38704" lon="4.97467">
+			<ele>-1</ele>
+			<name>11km486</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.38799" lon="4.97374">
+			<ele>1</ele>
+			<name>11km618</name>
+			<sym>Picnic Area</sym>
+		</rtept>
+
+		<rtept lat="52.38814" lon="4.9736">
+			<ele>1</ele>
+			<name>11km638</name>
+			<cmt>+~Weersloot</cmt>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.3883" lon="4.9735">
+			<ele>-0</ele>
+			<name>11km657 CONTINUE path</name>
+			<cmt>CONTINUE path Zwartegouw</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39208" lon="4.97055">
+			<ele>-1</ele>
+			<name>12km123 LEFT path</name>
+			<cmt>LEFT path</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39206" lon="4.97045">
+			<ele>-1</ele>
+			<name>12km130</name>
+			<sym>Bridge</sym>
+		</rtept>
+
+		<rtept lat="52.39203" lon="4.97033">
+			<ele>0</ele>
+			<name>12km139 RIGHT path</name>
+			<cmt>RIGHT path Buitengouw</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39228" lon="4.96973">
+			<ele>1</ele>
+			<name>12km189 RIGHT path</name>
+			<cmt>RIGHT path Buitengouw</cmt>
+			<sym>Waypoint</sym>
+		</rtept>
+
+		<rtept lat="52.39513" lon="4.96746">
+			<ele>0</ele>
+			<name>12km545 ARRIVAL</name>
+			<cmt>ARRIVAL</cmt>
+			<sym>Flag, Red</sym>
+		</rtept>
+
+	</rte>
+
+	<trk>
+		<name>NLNH0260 (13km)</name>
+		<trkseg>
+			<trkpt lat="52.39513" lon="4.96746">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.3953" lon="4.96792">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.39538" lon="4.96815">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39668" lon="4.9671">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39819" lon="4.96561">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39945" lon="4.96412">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40035" lon="4.96289">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40129" lon="4.96139">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40225" lon="4.95953">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.4024" lon="4.95929">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40253" lon="4.95941">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.4028" lon="4.95964">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.40327" lon="4.96019">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40368" lon="4.96053">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.40393" lon="4.96086">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40597" lon="4.96298">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40655" lon="4.96367">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.40658" lon="4.96372">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.40714" lon="4.96429">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.40729" lon="4.96443">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.40714" lon="4.96519">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.40698" lon="4.96586">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.40677" lon="4.96661">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.40686" lon="4.96665">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.40699" lon="4.96675">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.4072" lon="4.96702">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.40727" lon="4.96706">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.40745" lon="4.96716">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.40738" lon="4.96759">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.40749" lon="4.96766">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.40759" lon="4.96773">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40754" lon="4.96789">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40749" lon="4.96829">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40691" lon="4.97138">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40687" lon="4.97165">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40671" lon="4.97213">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40646" lon="4.97347">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40646" lon="4.97384">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40639" lon="4.97435">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40637" lon="4.97481">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40636" lon="4.97509">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40627" lon="4.97553">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40625" lon="4.97579">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40625" lon="4.97635">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40616" lon="4.97634">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40578" lon="4.97634">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40559" lon="4.97618">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40551" lon="4.97608">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40548" lon="4.97598">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40545" lon="4.9758">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40531" lon="4.97554">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.40506" lon="4.97507">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40489" lon="4.97483">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40475" lon="4.97453">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40457" lon="4.97447">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40444" lon="4.97437">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40423" lon="4.97412">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40385" lon="4.97361">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40372" lon="4.9734">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40101" lon="4.977">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.40011" lon="4.97824">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39994" lon="4.97814">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39992" lon="4.97822">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39988" lon="4.9783">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39981" lon="4.97839">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.3995" lon="4.97829">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39941" lon="4.97822">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39921" lon="4.97796">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.3991" lon="4.97788">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39893" lon="4.97762">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39885" lon="4.97739">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39877" lon="4.97728">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39865" lon="4.97724">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39853" lon="4.97714">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39831" lon="4.97683">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39818" lon="4.97673">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39787" lon="4.9764">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39782" lon="4.9763">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39766" lon="4.97589">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39763" lon="4.97568">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39759" lon="4.97552">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39749" lon="4.9755">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39736" lon="4.97567">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39732" lon="4.97581">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39753" lon="4.97723">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39753" lon="4.97744">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.3975" lon="4.97755">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39744" lon="4.97772">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.39748" lon="4.97795">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.39754" lon="4.97811">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.39762" lon="4.97823">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.39768" lon="4.97829">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.39773" lon="4.97837">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39775" lon="4.97847">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39775" lon="4.97867">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39772" lon="4.97893">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.39771" lon="4.97908">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39774" lon="4.97921">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39779" lon="4.9793">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39787" lon="4.97941">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.398" lon="4.97949">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.3981" lon="4.97952">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39823" lon="4.97969">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39827" lon="4.97989">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.3984" lon="4.98021">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39851" lon="4.98038">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39858" lon="4.9805">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.3986" lon="4.98067">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39861" lon="4.98109">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39863" lon="4.98139">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39865" lon="4.98153">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.3987" lon="4.98161">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39879" lon="4.98162">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39878" lon="4.98173">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39865" lon="4.98191">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.39854" lon="4.98201">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39834" lon="4.98194">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39814" lon="4.98202">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39597" lon="4.98199">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39585" lon="4.98206">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39576" lon="4.98217">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39577" lon="4.98233">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39587" lon="4.98277">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.3959" lon="4.98301">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39586" lon="4.98323">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39573" lon="4.98339">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39548" lon="4.98346">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39496" lon="4.98365">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39345" lon="4.98423">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39343" lon="4.98429">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39355" lon="4.98505">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39324" lon="4.98509">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39199" lon="4.98528">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39177" lon="4.98528">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39165" lon="4.9852">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39151" lon="4.98503">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.3914" lon="4.98484">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39123" lon="4.98508">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39108" lon="4.9853">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39108" lon="4.98539">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39148" lon="4.98688">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39227" lon="4.98939">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39269" lon="4.99217">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39268" lon="4.99227">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39257" lon="4.99257">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39248" lon="4.9928">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39251" lon="4.99295">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.39256" lon="4.99318">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.3926" lon="4.99321">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.39269" lon="4.99318">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.39276" lon="4.99319">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.39281" lon="4.99322">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.39287" lon="4.99329">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.39308" lon="4.99352">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.39311" lon="4.99361">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.39326" lon="4.99419">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.39312" lon="4.99422">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.39289" lon="4.99431">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.39081" lon="4.99531">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.39075" lon="4.99536">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.39072" lon="4.99541">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.3907" lon="4.99547">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.39072" lon="4.9956">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.39078" lon="4.99598">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39071" lon="4.99619">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39085" lon="4.99717">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39098" lon="4.99785">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39116" lon="4.99892">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.3913" lon="5.00005">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39138" lon="5.00058">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39137" lon="5.00086">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.39128" lon="5.00099">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.39038" lon="5.00139">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.39011" lon="5.0015">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.39001" lon="5.00157">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.38986" lon="5.00178">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38903" lon="5.0022">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38837" lon="5.00221">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.38825" lon="5.00225">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.38773" lon="5.0025">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38749" lon="5.00267">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38737" lon="5.00269">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38671" lon="5.00245">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.38661" lon="5.00243">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.38615" lon="5.00252">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.38583" lon="5.00257">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.38537" lon="5.00261">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.38529" lon="5.0026">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.38497" lon="5.00245">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.38479" lon="5.00231">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.3845" lon="5.00216">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38403" lon="5.00199">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38354" lon="5.00187">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38298" lon="5.00192">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38148" lon="5.0022">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.38136" lon="5.00226">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.38129" lon="5.00232">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.38108" lon="5.00202">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.38103" lon="5.00191">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.38059" lon="5.00044">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.38045" lon="5.00007">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.37996" lon="4.99831">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.37987" lon="4.99836">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.37978" lon="4.99841">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.37939" lon="4.99858">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.37902" lon="4.99871">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.37881" lon="4.99862">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.37902" lon="4.99871">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.37939" lon="4.99858">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.37978" lon="4.99841">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.37987" lon="4.99836">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.37969" lon="4.99767">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.37957" lon="4.99721">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.37934" lon="4.99635">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.3789" lon="4.99471">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.37863" lon="4.99372">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.37842" lon="4.99302">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.37827" lon="4.99253">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.37806" lon="4.99193">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.37794" lon="4.99161">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.3779" lon="4.99153">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.37766" lon="4.99101">
+				<ele>4</ele>
+			</trkpt>
+			<trkpt lat="52.3777" lon="4.99089">
+				<ele>4</ele>
+			</trkpt>
+			<trkpt lat="52.37757" lon="4.99071">
+				<ele>3</ele>
+			</trkpt>
+			<trkpt lat="52.37754" lon="4.99063">
+				<ele>3</ele>
+			</trkpt>
+			<trkpt lat="52.37755" lon="4.99056">
+				<ele>3</ele>
+			</trkpt>
+			<trkpt lat="52.3777" lon="4.99013">
+				<ele>3</ele>
+			</trkpt>
+			<trkpt lat="52.37778" lon="4.9899">
+				<ele>3</ele>
+			</trkpt>
+			<trkpt lat="52.37778" lon="4.9898">
+				<ele>3</ele>
+			</trkpt>
+			<trkpt lat="52.37775" lon="4.98965">
+				<ele>3</ele>
+			</trkpt>
+			<trkpt lat="52.37758" lon="4.98907">
+				<ele>3</ele>
+			</trkpt>
+			<trkpt lat="52.37745" lon="4.98881">
+				<ele>3</ele>
+			</trkpt>
+			<trkpt lat="52.37795" lon="4.98827">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.37815" lon="4.98798">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.37824" lon="4.98787">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.3783" lon="4.98781">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.37835" lon="4.98781">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.37841" lon="4.98783">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.37865" lon="4.98742">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37857" lon="4.98722">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37856" lon="4.987">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37889" lon="4.98594">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.37902" lon="4.98542">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.37908" lon="4.98502">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37918" lon="4.98464">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.3793" lon="4.98391">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37935" lon="4.98373">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37943" lon="4.98352">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37961" lon="4.98317">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37973" lon="4.98295">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.37983" lon="4.98285">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37981" lon="4.98272">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.3797" lon="4.98201">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37977" lon="4.98191">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.37979" lon="4.9818">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.3798" lon="4.98165">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.37979" lon="4.98146">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.37969" lon="4.98119">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37944" lon="4.98068">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.37927" lon="4.9802">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37885" lon="4.9792">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37867" lon="4.97863">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37856" lon="4.97835">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37836" lon="4.97796">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37787" lon="4.9767">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.37921" lon="4.97509">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.37975" lon="4.97626">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.37977" lon="4.97636">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.37971" lon="4.97669">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.3797" lon="4.97682">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.37971" lon="4.9769">
+				<ele>-2</ele>
+			</trkpt>
+			<trkpt lat="52.37988" lon="4.97746">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.38006" lon="4.97747">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38045" lon="4.97742">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38057" lon="4.97742">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.38065" lon="4.97735">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.3816" lon="4.97717">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.38167" lon="4.97708">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.38171" lon="4.97699">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.3818" lon="4.97692">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38204" lon="4.97662">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.38212" lon="4.97654">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.38217" lon="4.9765">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.38295" lon="4.97633">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38352" lon="4.9762">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.38354" lon="4.9759">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.38363" lon="4.97587">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.38384" lon="4.97591">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.38404" lon="4.97591">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.38508" lon="4.97549">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.38545" lon="4.97539">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.38636" lon="4.97539">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.38646" lon="4.97536">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.38654" lon="4.9753">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.38661" lon="4.97522">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38704" lon="4.97467">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38721" lon="4.9745">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38741" lon="4.97435">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38785" lon="4.97413">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38793" lon="4.97403">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38792" lon="4.97385">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.38794" lon="4.97377">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.38799" lon="4.97374">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.38814" lon="4.9736">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.3883" lon="4.9735">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.38854" lon="4.97328">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.38897" lon="4.97282">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39208" lon="4.97055">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39206" lon="4.97045">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39203" lon="4.97033">
+				<ele>0</ele>
+			</trkpt>
+			<trkpt lat="52.39204" lon="4.97021">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.39221" lon="4.96982">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.39228" lon="4.96973">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.39236" lon="4.96971">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.39248" lon="4.96965">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.39389" lon="4.96863">
+				<ele>2</ele>
+			</trkpt>
+			<trkpt lat="52.39427" lon="4.96834">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.39458" lon="4.96802">
+				<ele>1</ele>
+			</trkpt>
+			<trkpt lat="52.39461" lon="4.96791">
+				<ele>-0</ele>
+			</trkpt>
+			<trkpt lat="52.39469" lon="4.96779">
+				<ele>-1</ele>
+			</trkpt>
+			<trkpt lat="52.39513" lon="4.96746">
+				<ele>0</ele>
+			</trkpt>
+		</trkseg>
+	</trk>
+</gpx>
+
