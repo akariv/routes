@@ -764,10 +764,13 @@ document.getElementById("lb-in").addEventListener("click", () => zoomBy(1));
 document.getElementById("lb-out").addEventListener("click", () => zoomBy(-1));
 (function pan(){
   const map = document.getElementById("lb-map");
-  let on = false, px = 0, py = 0, moved = 0;
+  // The hit path must be read at pointerdown: setPointerCapture retargets the
+  // later pointerup/click to the container, so their target is never the track.
+  let on = false, px = 0, py = 0, moved = 0, downHit = null;
   map.addEventListener("pointerdown", e => {
     if (e.target.closest(".lb-zoom")) return;
     e.preventDefault();   // stop native image-drag and text selection
+    downHit = e.target.closest(".hit");
     on = true; px = e.clientX; py = e.clientY; moved = 0; map.classList.add("drag");
     map.setPointerCapture(e.pointerId);
   });
@@ -777,14 +780,15 @@ document.getElementById("lb-out").addEventListener("click", () => zoomBy(-1));
     LB.cx -= e.clientX - px; LB.cy -= e.clientY - py; px = e.clientX; py = e.clientY;
     schedule();
   });
-  // clicking a track on the full map jumps to its card and opens its own view
-  map.addEventListener("click", e => {
-    const hit = e.target.closest(".hit");
-    if (!hit || moved > 6) return;
-    jumpToCard(hit.dataset.id);
-    openMap(hit.dataset.id);
-  });
-  const end = e => { on = false; map.classList.remove("drag"); };
+  const end = e => {
+    on = false; map.classList.remove("drag");
+    // a press-and-release on a track (not a drag) opens that walk
+    if (e.type === "pointerup" && downHit && moved <= 6){
+      jumpToCard(downHit.dataset.id);
+      openMap(downHit.dataset.id);
+    }
+    downHit = null;
+  };
   map.addEventListener("pointerup", end); map.addEventListener("pointercancel", end);
   // wheel / two-finger scroll zooms the map instead of scrolling the page
   let acc = 0;
