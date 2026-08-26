@@ -36,6 +36,8 @@ that go with them, served via GitHub Pages.
 | `twiske.gpx` | Trage Tocht Het Twiske |
 | `graveland.gpx` | Trage Tocht 's-Graveland |
 | `tienbergen.gpx` | Tien Bergenroute (Nationaal Park Zuid-Kennemerland) |
+| `diemerbos.gpx` | Bijlmerweideroute / Diemerbos (Wandelnetwerk Noord-Holland) |
+| `fortenpad.gpx` | Fortenpad Uithoorn (Wandelnetwerk Noord-Holland) |
 
 - `download-gpx.sh` / `download-gpx-round2.sh` — the scripts originally used to
   fetch the freely available tracks from their sources.
